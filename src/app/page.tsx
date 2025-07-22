@@ -120,7 +120,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
       <div className="relative z-20 bg-white py-6 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 slide-in-left">
-            <span className="block slide-delay-1">Reinventing<span className="text-blue-600"> SOC</span></span>
+            <span className="block slide-delay-1">Reinventing<span className="text-blue-600"> SoC</span></span>
             <span className="block slide-delay-2">Design</span>
           </h1>
         </div>
@@ -557,25 +557,29 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">Direct Clients</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 items-center">
               {[
-                'Scaleflux India',
-                'HCL Technologies', 
-                'Tessolve',
-                'Cyient',
-                'USTGlobal',
-                'QuestGlobal',
-                'Sasken Technologies',
-                'Einfochips'
+                { name: 'Scaleflux India', logo: '/logo/scale-flux.avif' },
+                { name: 'HCL Technologies', logo: '/logo/hcl.png' },
+                { name: 'Tessolve', logo: '/logo/tessolve.jpg' },
+                { name: 'Cyient', logo: '/logo/cyient-logo-vector.png' },
+                { name: 'USTGlobal', logo: '/logo/UST_Global_Logo.jpg' },
+                { name: 'QuestGlobal', logo: '/logo/QuestGlobalLogo_250pxwidthx200px.avif' },
+                { name: 'Sasken Technologies', logo: '/logo/sasken.png' },
+                { name: 'Einfochips', logo: '/logo/einfochips_an_arrow_company_logo_promo.640b5879b753c.avif' }
               ].map((client, index) => (
                 <div key={index} className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 border border-gray-100">
                   <div className="aspect-square flex items-center justify-center">
                     <div className="text-center">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-white font-bold text-sm">
-                          {client.split(' ').map(word => word[0]).join('')}
-                        </span>
+                      <div className="w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                        <Image
+                          src={client.logo}
+                          alt={client.name}
+                          width={64}
+                          height={64}
+                          className="max-w-full max-h-full object-contain"
+                        />
                       </div>
                       <p className="text-xs font-medium text-gray-700 leading-tight">
-                        {client}
+                        {client.name}
                       </p>
                     </div>
                   </div>
@@ -589,24 +593,28 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">End Clients Served</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
               {[
-                'Tesla',
-                'Microsoft', 
-                'AMD',
-                'Renesas',
-                'STMicroelectronics',
-                'NXP Semiconductor',
-                'Global Unichip Corporation'
+                { name: 'Tesla', logo: '/logo/tesla.png' },
+                { name: 'Microsoft', logo: '/logo/microsoft.avif' },
+                { name: 'AMD', logo: '/logo/AMD.png' },
+                { name: 'Renesas', logo: '/logo/Renesas.png' },
+                { name: 'STMicroelectronics', logo: '/logo/stm.png' },
+                { name: 'NXP Semiconductor', logo: '/logo/NXP_logo_RGB_web.avif' },
+                { name: 'Global Unichip Corporation', logo: '/logo/GUC.png' }
               ].map((client, index) => (
                 <div key={index} className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 border border-gray-100">
                   <div className="aspect-square flex items-center justify-center">
                     <div className="text-center">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-white font-bold text-sm">
-                          {client.split(' ').map(word => word[0]).join('')}
-                        </span>
+                      <div className="w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                        <Image
+                          src={client.logo}
+                          alt={client.name}
+                          width={64}
+                          height={64}
+                          className="max-w-full max-h-full object-contain"
+                        />
                       </div>
                       <p className="text-xs font-medium text-gray-700 leading-tight">
-                        {client}
+                        {client.name}
                       </p>
                     </div>
                   </div>
@@ -615,23 +623,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             </div>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center space-x-8 text-sm text-gray-500">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Trusted Partners</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span>Direct Collaborations</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span>Global Reach</span>
-              </div>
-            </div>
-          </div>
+
         </div>
       </section>
     </div>
