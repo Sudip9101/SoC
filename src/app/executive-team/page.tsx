@@ -73,38 +73,42 @@ export default function ExecutiveTeamPage() {
     <div className="min-h-screen bg-white">
       {/* Heading and CTA Section */}
       <section className="py-16 text-center bg-white">
-        <h1 className="text-5xl font-bold mb-4 text-sky-500">Meet our Executive Team</h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <h1 className="text-5xl font-bold mb-4 text-sky-500 animate-fade-in">Meet our Executive Team</h1>
+        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-fade-in-delay">
           Our philosophy is simple; hire great people and give them the resources and support to do their best work.
         </p>
       </section>
 
       {/* Executive Cards Row - Centered for 2 people, with Know More modal */}
       <section className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-center items-stretch gap-10 mb-16">
-        {executiveTeam.slice(0, 2).map((member) => (
-          <div key={member.id} className="flex-1 flex flex-col bg-gray-100 rounded-xl overflow-hidden shadow group max-w-md mx-auto">
-            <div className="w-full h-72 bg-gray-200 grayscale group-hover:grayscale-0 transition flex items-center justify-center">
+        {executiveTeam.slice(0, 2).map((member, index) => (
+          <div 
+            key={member.id} 
+            className={`flex-1 flex flex-col bg-gray-100 rounded-xl overflow-hidden shadow group max-w-md mx-auto transform transition-all duration-700 hover:scale-105 hover:shadow-2xl animate-slide-up`}
+            style={{ animationDelay: `${index * 200}ms` }}
+          >
+            <div className="w-full h-72 bg-gray-200 transition-all duration-500 flex items-center justify-center group-hover:bg-gray-300">
               <Image
                 src={member.image}
                 alt={member.name}
                 width={320}
                 height={320}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-            <div className="bg-white px-6 py-5 flex flex-col flex-1">
-              <div className="font-bold text-gray-900 text-xl mb-1">{member.name}</div>
-              <div className="text-gray-700 text-base mb-4">{member.title}</div>
+            <div className="bg-white px-6 py-5 flex flex-col flex-1 transition-all duration-300 group-hover:bg-gray-50">
+              <div className="font-bold text-gray-900 text-xl mb-1 transition-colors duration-300 group-hover:text-sky-600">{member.name}</div>
+              <div className="text-gray-700 text-base mb-4 transition-colors duration-300 group-hover:text-gray-800">{member.title}</div>
               <div className="flex gap-3 mb-4">
-                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium transform hover:scale-105">
                   <FaLinkedin className="w-4 h-4" /> LinkedIn
                 </a>
-                <a href={`mailto:${member.email}`} className="inline-flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors text-sm font-medium">
+                <a href={`mailto:${member.email}`} className="inline-flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-all duration-300 text-sm font-medium transform hover:scale-105">
                   <Mail className="w-4 h-4" /> Email
                 </a>
               </div>
               <button
-                className="mt-auto bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg font-medium transition"
+                className="mt-auto bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                 onClick={() => setOpenModal(member.id)}
               >
                 Know More
@@ -141,32 +145,36 @@ export default function ExecutiveTeamPage() {
 
       {/* Advisors Section as tiles */}
       <section className="max-w-5xl mx-auto px-4 mb-20">
-        <h2 className="text-5xl font-bold text-sky-500 mb-4 text-center">Meet our Advisors</h2>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+        <h2 className="text-5xl font-bold text-sky-500 mb-4 text-center animate-fade-in">Meet our Advisors</h2>
+        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto text-center animate-fade-in-delay">
           Our advisors bring a wealth of experience and guidance, helping us achieve excellence and growth.
         </p>
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-10">
           {advisors.map((advisor, idx) => (
-            <div key={advisor.name} className="flex-1 flex flex-col bg-gray-100 rounded-xl overflow-hidden shadow group max-w-md mx-auto">
-              <div className="w-full h-64 bg-gray-200 grayscale group-hover:grayscale-0 transition flex items-center justify-center">
+            <div 
+              key={advisor.name} 
+              className={`flex-1 flex flex-col bg-gray-100 rounded-xl overflow-hidden shadow group max-w-md mx-auto transform transition-all duration-700 hover:scale-105 hover:shadow-2xl animate-slide-up`}
+              style={{ animationDelay: `${(idx + 2) * 200}ms` }}
+            >
+              <div className="w-full h-64 bg-gray-200 transition-all duration-500 flex items-center justify-center group-hover:bg-gray-300">
                 <Image
                   src={advisor.image}
                   alt={advisor.name}
                   width={320}
                   height={320}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                   onError={e => { e.currentTarget.src = '/team/placeholder.jpg'; }}
                 />
               </div>
-              <div className="bg-white px-6 py-5 flex flex-col flex-1">
-                <div className="font-bold text-gray-900 text-xl mb-1">{advisor.name}</div>
-                <div className="text-gray-700 text-base mb-2">{advisor.title}</div>
-                <div className="text-gray-600 text-sm mb-4 flex-1 whitespace-pre-line">{advisor.description}</div>
+              <div className="bg-white px-6 py-5 flex flex-col flex-1 transition-all duration-300 group-hover:bg-gray-50">
+                <div className="font-bold text-gray-900 text-xl mb-1 transition-colors duration-300 group-hover:text-sky-600">{advisor.name}</div>
+                <div className="text-gray-700 text-base mb-2 transition-colors duration-300 group-hover:text-gray-800">{advisor.title}</div>
+                <div className="text-gray-600 text-sm mb-4 flex-1 whitespace-pre-line transition-colors duration-300 group-hover:text-gray-700">{advisor.description}</div>
                 <div className="flex gap-3 mb-2">
-                  <a href={advisor.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                  <a href={advisor.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium transform hover:scale-105">
                     <FaLinkedin className="w-4 h-4" /> LinkedIn
                   </a>
-                  <a href={`mailto:${advisor.email}`} className="inline-flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors text-sm font-medium">
+                  <a href={`mailto:${advisor.email}`} className="inline-flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-all duration-300 text-sm font-medium transform hover:scale-105">
                     <Mail className="w-4 h-4" /> Email
                   </a>
                 </div>

@@ -118,6 +118,39 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
+      <section className="relative py-24" style={{ minHeight: '600px' }}>
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 w-full h-full">
+          <img src="/misson.jpg" alt="Mission Vision Background" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center h-full px-4">
+          {/* Mission */}
+          <div className="flex-1 flex flex-col items-center md:items-end md:pr-12" style={{ marginTop: 0 }}>
+            <h2 className="text-5xl md:text-6xl font-bold text-white uppercase tracking-widest mb-6 text-center md:text-right">Mission</h2>
+            <div className="flex items-center mb-6 md:justify-end w-full">
+              <span className="w-4 h-4" style={{ backgroundColor: '#05031E', borderRadius: '9999px', marginRight: '0.5rem' }}></span>
+              <span className="h-1 w-32 block" style={{ backgroundColor: '#05031E' }}></span>
+            </div>
+            <p className="text-white text-lg md:text-xl text-center md:text-right max-w-xl font-light">
+              To empower innovation in semiconductor design by delivering accessible, high-quality, and reliable IC solutions for a connected world. (You can update this text later.)
+            </p>
+          </div>
+          {/* Vision */}
+          <div className="flex-1 flex flex-col items-center md:items-start md:pl-12 mt-16 md:mt-32">
+            <h2 className="text-5xl md:text-6xl font-bold text-white uppercase tracking-widest mb-6 text-center md:text-left">Vision</h2>
+            <div className="flex items-center mb-6 md:justify-start w-full">
+              <span className="w-4 h-4" style={{ backgroundColor: '#05031E', borderRadius: '9999px', marginRight: '0.5rem' }}></span>
+              <span className="h-1 w-32 block" style={{ backgroundColor: '#05031E' }}></span>
+            </div>
+            <p className="text-white text-lg md:text-xl text-center md:text-left max-w-xl font-light">
+              To be a global leader in democratizing SoC and IC design, fostering a culture of excellence, collaboration, and continuous advancement. (You can update this text later.)
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Why We Exist Section - Enhanced Interactive Scroll */}
       <section className="py-20 bg-white scroll-container">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -155,7 +188,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="scroll-point opacity-50 transition-all duration-700 ease-out" data-image="1c.jpg">
+              <div className="scroll-point opacity-50 transition-all duration-700 ease-out" data-image="/1c.jpg">
                 <div className="flex items-start gap-6 p-6 rounded-xl hover:bg-gray-50 transition-colors duration-300">
                   <div className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-2 flex-shrink-0 shadow-lg"></div>
                   <div>
@@ -254,21 +287,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section - Cyan Background */}
-      <section className="py-20 bg-cyan-400">
+      {/* Stats Section - Custom Background */}
+      <section className="py-20" style={{ backgroundColor: '#080226' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
             <div>
               <h2 className="text-4xl font-bold text-white mb-6">
-              Built on Science.<br />
-              Driven by Impact.
-            </h2>
-              <p className="text-lg text-cyan-50 leading-relaxed">
-              With a cross-disciplinary team of scientists, engineers, and tech professionals,
+                Built on Science.<br />
+                Driven by Impact.
+              </h2>
+              <p className="text-lg text-white leading-relaxed">
+                With a cross-disciplinary team of scientists, engineers, and tech professionals,
                 working hand-in-hand to deliver semiconductor-grade solutions, at SoCTeamup, 
                 we're here to make high-performance semiconductor design accessible to all.
-            </p>
+              </p>
             </div>
 
             {/* Right Stats */}
@@ -276,17 +309,17 @@ export default function AboutPage() {
               <div>
                 <div className="text-4xl font-bold text-white mb-2">20+</div>
                 <div className="text-lg text-white font-medium mb-1">Patents</div>
-                <div className="text-sm text-cyan-50">in high-performance IC design</div>
+                <div className="text-sm text-white/80">in high-performance IC design</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-white mb-2">18+</div>
                 <div className="text-lg text-white font-medium mb-1">Years</div>
-                <div className="text-sm text-cyan-50">of collective excellence</div>
+                <div className="text-sm text-white/80">of collective excellence</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-white mb-2">1</div>
                 <div className="text-lg text-white font-medium mb-1">Vision</div>
-                <div className="text-sm text-cyan-50">Democratizing IC design</div>
+                <div className="text-sm text-white/80">Democratizing IC design</div>
               </div>
             </div>
           </div>
@@ -303,7 +336,7 @@ export default function AboutPage() {
             <div className="space-y-12">
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
                   <span className="text-xl font-bold text-white">2021</span>
                 </div>
               </div>
@@ -319,7 +352,7 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
                   <span className="text-xl font-bold text-white">2022</span>
                 </div>
               </div>
@@ -335,7 +368,7 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
                   <span className="text-xl font-bold text-white">2023</span>
                 </div>
               </div>
@@ -351,7 +384,7 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
                   <span className="text-xl font-bold text-white">2024</span>
                 </div>
               </div>

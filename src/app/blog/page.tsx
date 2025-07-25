@@ -8,6 +8,19 @@ export default function BlogPage() {
     (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
 
+  // Reorder: 2nd blog first, 3rd blog second, 1st blog third (if at least 3 blogs)
+  let reorderedPosts = allPosts;
+  if (allPosts.length >= 3) {
+    // 2nd blog first, 3rd blog second, 1st blog third
+    reorderedPosts = [allPosts[1], allPosts[2], allPosts[0], ...allPosts.slice(3)];
+    // Move 'Disrupting Security & Surveillance...' (title match) to second position
+    const idx = reorderedPosts.findIndex(post => post.title.includes('Disrupting Security & Surveillance with Edge Intelligence and Video Analytics'));
+    if (idx > -1 && idx !== 1) {
+      const [blog] = reorderedPosts.splice(idx, 1);
+      reorderedPosts.splice(1, 0, blog);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -22,7 +35,7 @@ export default function BlogPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="divide-y divide-gray-200">
-          {allPosts.map((post, idx) => (
+          {reorderedPosts.map((post, idx) => (
             <div key={post.id} className="flex flex-col md:flex-row items-stretch py-8 gap-4 md:gap-0">
               {/* Main Content */}
               <div className="flex-1 flex flex-col justify-center md:pr-6">

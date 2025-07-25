@@ -60,7 +60,7 @@ const Navbar = () => {
   // Navigation order and items
   const navigation = [
     { name: 'Products', href: '/products' },
-    { name: 'About Us', href: '/about' },
+    { name: 'Company', href: '/about' },
     { name: 'Executive Team', href: '/executive-team' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact Us', href: '/contact' },
@@ -115,33 +115,28 @@ const Navbar = () => {
                       <ChevronDown className="w-4 h-4 ml-1" />
                     </button>
                     {showProductsDropdown && (
-                      <div className="absolute left-0 mt-2 w-[1200px] bg-white text-gray-800 rounded-2xl shadow-2xl py-8 px-10 z-50 border border-sky-200 transition-all duration-300 ease-out transform opacity-100 translate-y-0 animate-dropdown">
-                        <div className="flex gap-8">
-                          {/* Left Column: IPs & SoCs */}
-                          <div className="flex-1 group">
-                            <Link href="/products/ips-socs" onClick={() => setShowProductsDropdown(false)}>
-                              <h3 className="text-lg font-bold text-sky-700 mb-4 uppercase tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">IPs & SoCs</h3>
-                            </Link>
-                          </div>
-
-                          {/* Middle Column: EDA Solutions */}
-                          <div className="flex-1 group">
-                            <Link href="/products/eda-solutions" onClick={() => setShowProductsDropdown(false)}>
-                              <h3 className="text-lg font-bold text-sky-700 mb-4 uppercase tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">EDA Solutions</h3>
-                            </Link>
-                          </div>
-
-                          {/* Right Column: FotonixAI Systems */}
-                          <div className="flex-1 group">
-                            <Link href="/products/fotonixai-systems" onClick={() => setShowProductsDropdown(false)}>
-                              <h3 className="text-lg font-bold text-sky-700 mb-4 uppercase tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">FotonixAI Systems</h3>
-                            </Link>
-                          </div>
-
-                          {/* Far Right: Image and Motto */}
-                          <div className="w-80 flex flex-col items-center animate-fade-in">
-                            <div className="relative overflow-hidden rounded-xl shadow-lg mb-4 hover:shadow-xl transition-shadow duration-300">
-                              <img src="/pic1.avif" alt="Products" className="w-72 h-48 object-cover transition-transform duration-300 hover:scale-105" />
+                      <div className="absolute left-0 mt-2 w-[340px] bg-white text-gray-800 rounded-2xl shadow-2xl py-6 px-4 z-50 border border-sky-200 transition-all duration-300 ease-out transform opacity-100 translate-y-0 animate-dropdown overflow-hidden">
+                        {/* Decorative geometric lines background */}
+                        <div className="absolute inset-0 pointer-events-none z-0">
+                          <div className="absolute top-4 left-8 w-24 h-24 border border-blue-400/20 rounded-lg transform rotate-12"></div>
+                          <div className="absolute bottom-8 right-8 w-16 h-16 border border-blue-300/15 rounded-lg transform -rotate-6"></div>
+                          <div className="absolute top-1/2 left-1/2 w-24 h-24 border border-blue-500/10 rounded-lg transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
+                        </div>
+                        <div className="relative z-10 flex flex-col items-stretch">
+                          {/* Vertical Product Buttons */}
+                          <Link href="/products/ips-socs" onClick={() => setShowProductsDropdown(false)}>
+                            <h3 className="text-lg font-bold text-sky-700 mb-2 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">IPs & SoCs</h3>
+                          </Link>
+                          <Link href="/products/eda-solutions" onClick={() => setShowProductsDropdown(false)}>
+                            <h3 className="text-lg font-bold text-sky-700 mb-2 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">EDA Solutions</h3>
+                          </Link>
+                          <Link href="/products/fotonixai-systems" onClick={() => setShowProductsDropdown(false)}>
+                            <h3 className="text-lg font-bold text-sky-700 mb-4 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">FotonixAI System</h3>
+                          </Link>
+                          {/* Image and Motto below buttons */}
+                          <div className="flex flex-col items-center animate-fade-in mt-2">
+                            <div className="relative overflow-hidden rounded-xl shadow-lg mb-3 hover:shadow-xl transition-shadow duration-300">
+                              <img src="/pic1.avif" alt="Products" className="w-64 h-36 object-cover transition-transform duration-300 hover:scale-105" />
                               <div className="absolute inset-0 bg-sky-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div className="text-center">
@@ -151,17 +146,16 @@ const Navbar = () => {
                               </p>
                             </div>
                           </div>
-                        </div>
-
-                        {/* Bottom Link */}
-                        <div className="mt-8 pt-4 border-t border-sky-200">
-                          <Link
-                            href="/products"
-                            className="text-sky-600 hover:text-sky-800 text-sm font-medium transition-colors duration-300 hover:underline"
-                            onClick={() => setShowProductsDropdown(false)}
-                          >
-                            View Products →
-                          </Link>
+                          {/* Bottom Link */}
+                          <div className="mt-6 pt-3 border-t border-sky-200 text-center">
+                            <Link
+                              href="/products"
+                              className="text-sky-600 hover:text-sky-800 text-sm font-medium transition-colors duration-300 hover:underline"
+                              onClick={() => setShowProductsDropdown(false)}
+                            >
+                              View Products →
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     )}

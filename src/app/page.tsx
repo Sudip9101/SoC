@@ -216,8 +216,14 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
           
           {/* Card 1 - Design Verification */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center card-hover overflow-hidden">
-            <div className="mb-4 overflow-hidden rounded-lg">
-              <Image src="/1.jpg" alt="Design Verification" width={240} height={160} className="card-image object-cover rounded-lg" />
+            <div className="mb-4 w-[240px] h-[160px] overflow-hidden rounded-lg flex items-center justify-center">
+              <Image
+                src="/1.jpg"
+                alt="Design Verification"
+                width={240}
+                height={160}
+                className="object-cover w-full h-full rounded-lg"
+              />
             </div>
             <h3 className="font-bold text-xl mb-2 text-black text-center leading-tight">
               <span className="block">Design Verification</span>
@@ -227,7 +233,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             </p>
             <button 
               onClick={() => toggleCardExpansion('verification')}
-              className="mt-auto bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+              className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: '#080225' }}
             >
               Explore
             </button>
@@ -260,8 +267,14 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
 
           {/* Card 2 - Design for Test (DFT) */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center card-hover overflow-hidden">
-            <div className="mb-4 overflow-hidden rounded-lg">
-              <Image src="/2.jpg" alt="Design for Test (DFT)" width={240} height={160} className="card-image object-cover rounded-lg" />
+            <div className="mb-4 w-[240px] h-[160px] overflow-hidden rounded-lg flex items-center justify-center">
+              <Image
+                src="/2.jpg"
+                alt="Design for Test (DFT)"
+                width={240}
+                height={160}
+                className="object-cover w-full h-full rounded-lg"
+              />
             </div>
             <h3 className="font-bold text-xl mb-2 text-black text-center leading-tight">
               <span className="block">Design for Test (DFT)</span>
@@ -271,7 +284,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             </p>
             <button 
               onClick={() => toggleCardExpansion('dft')}
-              className="mt-auto bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+              className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: '#080225' }}
             >
               Explore
             </button>
@@ -305,8 +319,14 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
 
           {/* Card 3 - Physical Design */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center card-hover overflow-hidden">
-            <div className="mb-4 overflow-hidden rounded-lg">
-              <Image src="/3.jpg" alt="Physical Design" width={240} height={160} className="card-image object-cover rounded-lg" />
+            <div className="mb-4 w-[240px] h-[160px] overflow-hidden rounded-lg flex items-center justify-center">
+              <Image
+                src="/3.jpg"
+                alt="Physical Design"
+                width={240}
+                height={160}
+                className="object-cover w-full h-full rounded-lg"
+              />
             </div>
             <h3 className="font-bold text-xl mb-2 text-black text-center leading-tight">
               <span className="block">Physical Design</span>
@@ -316,7 +336,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             </p>
             <button 
               onClick={() => toggleCardExpansion('physical')}
-              className="mt-auto bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+              className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: '#080225' }}
             >
               Explore
             </button>
@@ -355,8 +376,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
           
           {/* Card 4 - Analog and Mixed-Signal Design */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center card-hover overflow-hidden">
-            <div className="mb-4 overflow-hidden rounded-lg">
-              <Image src="/4.jpg" alt="Analog and Mixed-Signal Design" width={360} height={240} className="card-image object-cover rounded-lg" />
+            <div className="mb-4 w-[240px] h-[160px] overflow-hidden rounded-lg flex items-center justify-center">
+              <Image src="/4.jpg" alt="Analog and Mixed-Signal Design" width={240} height={160} className="object-cover w-full h-full rounded-lg" />
             </div>
             <h3 className="font-bold text-xl mb-2 text-black text-center leading-tight">
               <span className="block">Analog and Mixed-Signal Design</span>
@@ -366,7 +387,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             </p>
             <button 
               onClick={() => toggleCardExpansion('analog')}
-              className="mt-auto bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+              className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: '#080225' }}
             >
               Explore
             </button>
@@ -398,147 +420,167 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
 
           {/* Keep the existing Silicon Layout card */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center card-hover overflow-hidden">
-            <div className="mb-4 overflow-hidden rounded-lg">
-              <Image src="/6.jpeg" alt="Silicon Layout" width={360} height={240} className="card-image object-cover rounded-lg" />
+            <div className="mb-4 w-[240px] h-[160px] overflow-hidden rounded-lg flex items-center justify-center">
+              <Image src="/6.jpeg" alt="Silicon Layout" width={240} height={160} className="object-cover w-full h-full rounded-lg" />
             </div>
             <h3 className="font-bold text-xl mb-2 text-black text-center leading-tight">
               <span className="block">Silicon Layout</span>
             </h3>
             <p className="text-gray-800 text-sm mb-4 text-center leading-relaxed">We don't just place polygons — we sculpt silicon. Our team handles complex analog and full-custom layouts with deep tech precision, ensuring every transistor, via, and metal layer aligns with your performance and yield goals.</p>
-            <Link href="#" className="mt-auto bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">Learn More</Link>
+            <Link href="#" className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105" style={{ backgroundColor: '#080225' }}>
+              Explore
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Industries We Serve Section */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Industries We Serve
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our expertise spans a wide range of industries, we help you see the world of Electronics differently.
-            </p>
-          </div>
+      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: '#080225' }}>
+  {/* Background geometric lines - similar to the attached image */}
+  <div className="absolute inset-0 pointer-events-none">
+    {/* Top right geometric shapes */}
+    <div className="absolute top-0 right-0 w-96 h-96">
+      <div className="absolute top-20 right-20 w-40 h-40 border border-blue-500/20 rounded-lg transform rotate-12"></div>
+      <div className="absolute top-40 right-40 w-32 h-32 border border-blue-400/15 rounded-lg transform -rotate-12"></div>
+      <div className="absolute top-60 right-10 w-24 h-24 border border-blue-300/10 rounded-lg transform rotate-45"></div>
+    </div>
+    
+    {/* Bottom left geometric shapes */}
+    <div className="absolute bottom-0 left-0 w-80 h-80">
+      <div className="absolute bottom-20 left-20 w-36 h-36 border border-blue-500/15 rounded-lg transform -rotate-12"></div>
+      <div className="absolute bottom-40 left-5 w-28 h-28 border border-blue-400/10 rounded-lg transform rotate-12"></div>
+    </div>
+    
+    {/* Center decorative lines */}
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 border border-blue-600/10 rounded-lg transform rotate-45"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-32 h-32 border border-blue-500/15 rounded-lg transform -rotate-45"></div>
+    </div>
+  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {/* Industry 1 - Semiconductor & Fabless Design Houses */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image 
-                  src="/1a.jpg" 
-                  alt="Semiconductor & Fabless Design Houses" 
-                  width={300} 
-                  height={200} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
-                  Semiconductor & Fabless Design Houses
-                </h3>
-                <p className="text-sm text-gray-600 text-center leading-relaxed">
-                  Full-spectrum RTL to GDSII support for analog, digital, and mixed-signal SoCs at advanced nodes (2nm–28nm).
-                </p>
-              </div>
-            </div>
+  <div className="max-w-7xl mx-auto relative z-10">
+    
+    {/* Centered Title and Subtitle */}
+    <div className="text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        Industries We Serve
+      </h2>
+      <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+        Our expertise spans a wide range of industries, we help you see the world of Electronics differently.
+      </p>
+    </div>
 
-            {/* Industry 2 - Automotive Electronics */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image 
-                  src="/auto.jpeg" 
-                  alt="Automotive Electronics" 
-                  width={300} 
-                  height={200} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
-                  Automotive Electronics
-                </h3>
-                <p className="text-sm text-gray-600 text-center leading-relaxed">
-                  Functional safety, mission-critical DFT, and AMS design support for ADAS.
-                </p>
-              </div>
-            </div>
-
-            {/* Industry 3 - Consumer Electronics */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image 
-                  src="/4.jpg" 
-                  alt="Consumer Electronics" 
-                  width={300} 
-                  height={200} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
-                  Consumer Electronics
-                </h3>
-                <p className="text-sm text-gray-600 text-center leading-relaxed">
-                  High-volume verification and IP integration for multimedia, smart devices, and edge AI products.
-                </p>
-              </div>
-            </div>
-
-            {/* Industry 4 - Cloud & AI Infrastructure */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image 
-                  src="/ai.jpeg" 
-                  alt="Cloud & AI Infrastructure" 
-                  width={300} 
-                  height={200} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
-                  Cloud & AI Infrastructure
-                </h3>
-                <p className="text-sm text-gray-600 text-center leading-relaxed">
-                  DFT automation and IP support for data center AI accelerators, inference engines, and custom silicon for hyperscalers.
-                </p>
-              </div>
-            </div>
-
-            {/* Industry 5 - IoT & Edge Computing */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image 
-                  src="/aboutus2.jpg" 
-                  alt="IoT & Edge Computing" 
-                  width={300} 
-                  height={200} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
-                  IoT & Edge Computing
-                </h3>
-                <p className="text-sm text-gray-600 text-center leading-relaxed">
-                  IP development and verification for ultra-low-power edge chips, smart sensors, and connectivity solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Optional: Add navigation dots for mobile carousel */}
-          <div className="flex justify-center mt-8 lg:hidden">
-            <div className="flex space-x-2">
-              {[1, 2, 3, 4, 5].map((dot) => (
-                <div key={dot} className="w-2 h-2 bg-gray-300 rounded-full"></div>
-              ))}
-            </div>
-          </div>
+    {/* Grid of 5 Horizontal Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      
+      {/* Card 1: Semiconductor & Fabless Design Houses */}
+      <div className="bg-white/5 backdrop-blur-sm border border-blue-500/20 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+        <div className="aspect-[4/3] overflow-hidden">
+          <Image 
+            src="/1a.jpg" 
+            alt="Semiconductor & Fabless Design Houses" 
+            width={300} 
+            height={200} 
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+          />
         </div>
-      </section>
+        <div className="p-6 text-center">
+          <h3 className="text-lg font-bold text-white mb-3">
+            Semiconductor & Fabless Design Houses
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Full-spectrum RTL to GDSII support for analog, digital, and mixed-signal SoCs at advanced nodes (2nm–28nm).
+          </p>
+        </div>
+      </div>
+
+      {/* Card 2: Automotive Electronics */}
+      <div className="bg-white/5 backdrop-blur-sm border border-blue-500/20 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+        <div className="aspect-[4/3] overflow-hidden">
+          <Image 
+            src="/auto.jpeg" 
+            alt="Automotive Electronics" 
+            width={300} 
+            height={200} 
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+          />
+        </div>
+        <div className="p-6 text-center">
+          <h3 className="text-lg font-bold text-white mb-3">
+            Automotive Electronics
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Functional safety, mission-critical DFT, and AMS design support for ADAS.
+          </p>
+        </div>
+      </div>
+
+      {/* Card 3: Consumer Electronics */}
+      <div className="bg-white/5 backdrop-blur-sm border border-blue-500/20 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+        <div className="aspect-[4/3] overflow-hidden">
+          <Image 
+            src="/4.jpg" 
+            alt="Consumer Electronics" 
+            width={300} 
+            height={200} 
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+          />
+        </div>
+        <div className="p-6 text-center">
+          <h3 className="text-lg font-bold text-white mb-3">
+            Consumer Electronics
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            High-volume verification and IP integration for multimedia, smart devices, and edge AI products.
+          </p>
+        </div>
+      </div>
+
+      {/* Card 4: Cloud & AI Infrastructure */}
+      <div className="bg-white/5 backdrop-blur-sm border border-blue-500/20 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+        <div className="aspect-[4/3] overflow-hidden">
+          <Image 
+            src="/ai.jpeg" 
+            alt="Cloud & AI Infrastructure" 
+            width={300} 
+            height={200} 
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+          />
+        </div>
+        <div className="p-6 text-center">
+          <h3 className="text-lg font-bold text-white mb-3">
+            Cloud & AI Infrastructure
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            DFT automation and IP support for data center AI accelerators, inference engines, and custom silicon for hyperscalers.
+          </p>
+        </div>
+      </div>
+
+      {/* Card 5: IoT & Edge Computing */}
+      <div className="bg-white/5 backdrop-blur-sm border border-blue-500/20 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+        <div className="aspect-[4/3] overflow-hidden">
+          <Image 
+            src="/aboutus2.jpg" 
+            alt="IoT & Edge Computing" 
+            width={300} 
+            height={200} 
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+          />
+        </div>
+        <div className="p-6 text-center">
+          <h3 className="text-lg font-bold text-white mb-3">
+            IoT & Edge Computing
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            IP development and verification for ultra-low-power edge chips, smart sensors, and connectivity solutions.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Our Clients Section */}
       <section className="py-16 px-4 bg-white">
@@ -594,7 +636,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
               {[
                 { name: 'Tesla', logo: '/logo/tesla.png' },
-                { name: 'Microsoft', logo: '/logo/microsoft.avif' },
+                { name: 'Microsoft', logo: '/logo/Microsoft-Logo.png' },
                 { name: 'AMD', logo: '/logo/AMD.png' },
                 { name: 'Renesas', logo: '/logo/Renesas.png' },
                 { name: 'STMicroelectronics', logo: '/logo/stm.png' },
