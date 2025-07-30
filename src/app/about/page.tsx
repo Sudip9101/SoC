@@ -134,7 +134,7 @@ export default function AboutPage() {
               <span className="h-1 w-32 block" style={{ backgroundColor: '#05031E' }}></span>
             </div>
             <p className="text-white text-lg md:text-xl text-center md:text-right max-w-xl font-light">
-              To empower innovation in semiconductor design by delivering accessible, high-quality, and reliable IC solutions for a connected world. (You can update this text later.)
+              To lead the global shift toward agile, inclusive, and high-impact SoC design, making advanced semiconductor innovation affordable, scalable, and accessible to all.
             </p>
           </div>
           {/* Vision */}
@@ -145,7 +145,10 @@ export default function AboutPage() {
               <span className="h-1 w-32 block" style={{ backgroundColor: '#05031E' }}></span>
             </div>
             <p className="text-white text-lg md:text-xl text-center md:text-left max-w-xl font-light">
-              To be a global leader in democratizing SoC and IC design, fostering a culture of excellence, collaboration, and continuous advancement. (You can update this text later.)
+              • Deliver low-cost, high-quality SoC design and manufacturing services that meets modern performance and reliability standards.<br/><br/>
+              • Build a scalable, agile SoC design platform matching the speed and flexibility of software development.<br/><br/>
+              • Amplify the visibility and impact of engineers, IPs, and innovations across the semiconductor ecosystem.<br/><br/>
+              • Democratize SoC design through advanced hybrid EDA flows that merge open innovation with production-grade reliability.
             </p>
           </div>
         </div>
@@ -307,14 +310,14 @@ export default function AboutPage() {
             {/* Right Stats */}
             <div className="grid grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-white mb-2">20+</div>
+                <div className="text-4xl font-bold text-white mb-2">10+</div>
                 <div className="text-lg text-white font-medium mb-1">Patents</div>
-                <div className="text-sm text-white/80">in high-performance IC design</div>
+                <div className="text-sm text-white/80">in high performance IC design and Systems</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-white mb-2">18+</div>
+                <div className="text-4xl font-bold text-white mb-2">50+</div>
                 <div className="text-lg text-white font-medium mb-1">Years</div>
-                <div className="text-sm text-white/80">of collective excellence</div>
+                <div className="text-sm text-white/80">of collective experience</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-white mb-2">1</div>
@@ -337,7 +340,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">2021</span>
+                  <span className="text-xl font-bold text-white">2022</span>
                 </div>
               </div>
               <div className="flex-1">
@@ -353,7 +356,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">2022</span>
+                  <span className="text-xl font-bold text-white">2023</span>
                 </div>
               </div>
               <div className="flex-1">
@@ -369,7 +372,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">2023</span>
+                  <span className="text-xl font-bold text-white">2024</span>
                 </div>
               </div>
               <div className="flex-1">
@@ -385,7 +388,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-8">
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 bg-[#080226] rounded-full flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">2024</span>
+                  <span className="text-xl font-bold text-white">2025</span>
                 </div>
               </div>
               <div className="flex-1">

@@ -61,7 +61,7 @@ const Navbar = () => {
   const navigation = [
     { name: 'Products', href: '/products' },
     { name: 'Company', href: '/about' },
-    { name: 'Executive Team', href: '/executive-team' },
+    { name: 'Our Team', href: '/executive-team' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact Us', href: '/contact' },
   ];
@@ -131,7 +131,7 @@ const Navbar = () => {
                             <h3 className="text-lg font-bold text-sky-700 mb-2 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">EDA Solutions</h3>
                           </Link>
                           <Link href="/products/fotonixai-systems" onClick={() => setShowProductsDropdown(false)}>
-                            <h3 className="text-lg font-bold text-sky-700 mb-4 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">FotonixAI System</h3>
+                            <h3 className="text-lg font-bold text-sky-700 mb-4 tracking-wide hover:text-sky-600 transition-colors duration-300 cursor-pointer transform hover:scale-105">FotonixAI Systems</h3>
                           </Link>
                           {/* Image and Motto below buttons */}
                           <div className="flex flex-col items-center animate-fade-in mt-2">
@@ -140,7 +140,7 @@ const Navbar = () => {
                               <div className="absolute inset-0 bg-sky-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div className="text-center">
-                              <h4 className="text-xl font-bold text-sky-700 mb-2 animate-slide-up">Reinventing SoC</h4>
+                              <h4 className="text-xl font-bold text-sky-700 mb-2 animate-slide-up">Reinventing SoC Design</h4>
                               <p className="text-sm text-gray-600 leading-relaxed animate-slide-up-delay">
                                 Learn about our different design models, determine which is the best fit for your company, and connect with a SoCTeamup representative.
                               </p>

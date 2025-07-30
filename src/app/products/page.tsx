@@ -79,7 +79,8 @@ export default function ProductsPage() {
                  
                  <Link
                    href="/products/ips-socs"
-                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-sky-600 hover:bg-sky-700 transition-all duration-300 transform hover:scale-105"
+                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white transition-all duration-300 transform hover:scale-105"
+                   style={{ backgroundColor: '#7233F7' }}
                  >
                    <span>Explore</span>
                    <svg className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,7 +125,8 @@ export default function ProductsPage() {
                  
                  <Link
                    href="/products/eda-solutions"
-                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white transition-all duration-300 transform hover:scale-105"
+                   style={{ backgroundColor: '#7233F7' }}
                  >
                    <span>Explore</span>
                    <svg className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +171,8 @@ export default function ProductsPage() {
                  
                  <Link
                    href="/products/fotonixai-systems"
-                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                   className="group/btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white transition-all duration-300 transform hover:scale-105"
+                   style={{ backgroundColor: '#7233F7' }}
                  >
                    <span>Explore</span>
                    <svg className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

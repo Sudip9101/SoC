@@ -119,7 +119,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">Call Us</h3>
-                    <p className="text-gray-600">+91 120 XXX XXXX</p>
+                    <p className="text-gray-600">+91 7428663356</p>
                   </div>
                 </div>
 

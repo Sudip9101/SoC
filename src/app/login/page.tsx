@@ -198,14 +198,7 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {/* Demo Credentials (Development Only) */}
-          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h4 className="text-sm font-medium text-blue-900 mb-2">Demo Credentials (Development)</h4>
-            <p className="text-sm text-blue-700">
-              <strong>Email:</strong> demo@socteamup.com<br />
-              <strong>Password:</strong> password123
-            </p>
-          </div>
+
 
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-6">

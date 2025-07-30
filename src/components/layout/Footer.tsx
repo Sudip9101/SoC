@@ -10,16 +10,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <div className="mb-4">
-              <Image
-                src="/logo.png"
-                alt="SoCTeamUp"
-                width={180}
-                height={60}
-                className="h-12 w-auto"
-                priority
-              />
-            </div>
             <p className="text-gray-300 mb-4">
               Leading semiconductor design services company specializing in Analog, Digital, Mixed-Signal IC design, 
               DFT, Design Verification, Physical IC Design, and Silicon Layout solutions.
@@ -50,7 +40,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link href="/executive-team" className="text-gray-300 hover:text-white transition-colors">
-                  Executive Team
+                  Our Team
                 </Link>
               </li>
             </ul>
@@ -66,7 +56,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Phone className="w-4 h-4 mr-2 mt-1 text-gray-400 flex-shrink-0" />
-                <span className="text-gray-300">+91 120 XXX XXXX</span>
+                <span className="text-gray-300">+91 7428663356</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="w-4 h-4 mr-2 mt-1 text-gray-400 flex-shrink-0" />
@@ -105,11 +95,11 @@ const Footer = () => {
           </div>
           {/* Policy Links Row */}
           <div className="flex flex-wrap justify-center items-center space-x-4 mb-4 text-sm">
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Terms & Policies</a>
+            <a href="/terms-policies" className="text-gray-300 hover:text-white transition-colors">Terms & Policies</a>
             <span className="text-gray-500">|</span>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Use</a>
+            <a href="/terms-of-use" className="text-gray-300 hover:text-white transition-colors">Terms of Use</a>
             <span className="text-gray-500">|</span>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
           </div>
           <p className="text-gray-400">
             &copy; {new Date().getFullYear()} SoCTeamup. All rights reserved.

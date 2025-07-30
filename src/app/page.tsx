@@ -119,9 +119,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
       {/* Headline Above Video - Fixed Position */}
       <div className="relative z-20 bg-white py-6 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 slide-in-left">
-            <span className="block slide-delay-1">Reinventing<span className="text-blue-600"> SoC</span></span>
-            <span className="block slide-delay-2">Design</span>
+          <h1 className="text-4xl lg:text-6xl font-bold slide-in-left" style={{ color: '#624DF4' }}>
+            Reinventing SoC Design
           </h1>
         </div>
       </div>
@@ -199,7 +198,8 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
               {!showFullDesc && (
                 <button
                   onClick={() => setShowFullDesc(true)}
-                  className="inline-flex items-center bg-primary-600 text-white px-6 py-2 rounded-full font-medium hover:bg-primary-700 transition-colors"
+                  className="inline-flex items-center text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
+                  style={{ backgroundColor: '#7233F7' }}
                 >
                   Read more
                 </button>
@@ -234,7 +234,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <button 
               onClick={() => toggleCardExpansion('verification')}
               className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
-              style={{ backgroundColor: '#080225' }}
+              style={{ backgroundColor: '#7233F7' }}
             >
               Explore
             </button>
@@ -285,7 +285,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <button 
               onClick={() => toggleCardExpansion('dft')}
               className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
-              style={{ backgroundColor: '#080225' }}
+              style={{ backgroundColor: '#7233F7' }}
             >
               Explore
             </button>
@@ -337,7 +337,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <button 
               onClick={() => toggleCardExpansion('physical')}
               className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
-              style={{ backgroundColor: '#080225' }}
+              style={{ backgroundColor: '#7233F7' }}
             >
               Explore
             </button>
@@ -388,7 +388,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
             <button 
               onClick={() => toggleCardExpansion('analog')}
               className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105"
-              style={{ backgroundColor: '#080225' }}
+              style={{ backgroundColor: '#7233F7' }}
             >
               Explore
             </button>
@@ -427,7 +427,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
               <span className="block">Silicon Layout</span>
             </h3>
             <p className="text-gray-800 text-sm mb-4 text-center leading-relaxed">We don't just place polygons — we sculpt silicon. Our team handles complex analog and full-custom layouts with deep tech precision, ensuring every transistor, via, and metal layer aligns with your performance and yield goals.</p>
-            <Link href="#" className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105" style={{ backgroundColor: '#080225' }}>
+            <Link href="#" className="mt-auto text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105" style={{ backgroundColor: '#7233F7' }}>
               Explore
             </Link>
           </div>
