@@ -1,0 +1,30 @@
+# Backend Container - Express Server with Lambda Functions
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy the entire project first to access lambda directory
+COPY . .
+
+# Move to lambda directory and install dependencies
+WORKDIR /app/lambda
+
+# Install dependencies for lambda functions
+RUN npm install --production
+
+# Go back to app directory
+WORKDIR /app
+
+# Install Express for serving Lambda functions in the app directory
+RUN npm install express cors
+
+# Expose port
+EXPOSE 3001
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3001
+
+# Start the server
+CMD ["node", "server.js"] 
