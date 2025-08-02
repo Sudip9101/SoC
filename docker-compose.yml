@@ -27,6 +27,12 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
+      # Database configuration
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=socteamup_db
+      - DB_USER=socteamup_user
+      - DB_PASSWORD=socteamup_password
       # Add your environment variables here
       - JWT_SECRET=your-jwt-secret-key
       - GOOGLE_CLIENT_ID=your-google-client-id
@@ -34,6 +40,25 @@ services:
       - AWS_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=your-aws-access-key
       - AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+    depends_on:
+      - mysql
+    networks:
+      - socteamup-network
+    restart: unless-stopped
+
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=socteamup_db
+      - MYSQL_USER=socteamup_user
+      - MYSQL_PASSWORD=socteamup_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - socteamup-network
     restart: unless-stopped
@@ -61,5 +86,7 @@ networks:
     driver: bridge
 
 volumes:
+  mysql_data:
+    driver: local
   # Add any persistent volumes if needed
   node_modules: 

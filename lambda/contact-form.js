@@ -5,6 +5,7 @@
 
 const AWS = require('aws-sdk');
 const ses = new AWS.SES({ region: 'us-east-1' });
+const { saveContactSubmission } = require('./database');
 
 // CORS headers for frontend integration
 const corsHeaders = {
@@ -173,6 +174,10 @@ exports.handler = async (event) => {
       };
     }
 
+    // Save to database
+    const dbResult = await saveContactSubmission(formData);
+    console.log('Contact submission saved to database:', dbResult);
+
     // Send notification email to team
     await sendEmail(formData);
     console.log('Notification email sent successfully');
@@ -180,9 +185,6 @@ exports.handler = async (event) => {
     // Send auto-reply to user
     await sendAutoReply(formData.email, formData.name);
     console.log('Auto-reply sent successfully');
-
-    // Log submission for analytics (optional)
-    // await logSubmission(formData);
 
     return {
       statusCode: 200,
