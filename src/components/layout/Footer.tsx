@@ -11,11 +11,10 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
             <p className="text-gray-300 mb-4">
-              Leading semiconductor design services company specializing in Analog, Digital, Mixed-Signal IC design, 
-              DFT, Design Verification, Physical IC Design, and Silicon Layout solutions.
+              SoCTeamup Semiconductors — Building advanced IPs, AI-driven EDA tools, and edge AI systems for next-generation semiconductor innovation
             </p>
             <p className="text-gray-400 text-sm">
-              Innovating together for the future of semiconductor technology.
+              From silicon intelligence to smart systems—engineering the future
             </p>
           </div>
 

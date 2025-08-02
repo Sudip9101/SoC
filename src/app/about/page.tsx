@@ -346,8 +346,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <p className="text-gray-700">
-                    SoCTeamup begins operations as a high-performance IC design and verification company,
-                    focusing on delivering cutting-edge semiconductor solutions.
+                    SoCTeamup Semiconductors is established with a focus on design services and consulting in the SoC domain. Initial capabilities are built around RTL design, verification, and DFT insertion for digital ICs, laying the foundation for deeper vertical integration.
                   </p>
                 </div>
                 </div>
@@ -362,8 +361,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <p className="text-gray-700">
-                    Expanded our services to include full-custom layout design and physical verification,
-                    establishing partnerships with leading semiconductor companies.
+                    The company expands its expertise into the development of Design-for-Test (DFT) IPs, including scan compression, memory BIST, and secure test access logic. Internal efforts begin toward building automated test architecture planning tools to reduce turnaround time and enhance silicon testability.
                   </p>
                 </div>
                 </div>
@@ -378,8 +376,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <p className="text-gray-700">
-                    Launched comprehensive DFT solutions and advanced verification methodologies,
-                    strengthening our position in the semiconductor industry.
+                    With a maturing IP portfolio, SoCTeamup initiates the development of its own AI-driven EDA tools to automate key aspects of the DFT lifecycle. Simultaneously, work begins on edge AI-enabled systems for real-time video analytics and access control under the emerging Fotonix.AI systems vertical.
                   </p>
                 </div>
                 </div>
@@ -394,8 +391,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <p className="text-gray-700">
-                    Continuing to innovate and expand our services while maintaining our commitment
-                    to excellence in semiconductor design and verification.
+                    SoCTeamup Semiconductors evolves into a full-spectrum semiconductor company, delivering reusable DFT IPs, AI-powered EDA automation, and intelligent edge systems. The FotonixAI product line is expanded with field-deployed smart surveillance and automation solutions, while turnkey SoC execution and IP licensing become key revenue drivers.
                   </p>
                 </div>
               </div>
