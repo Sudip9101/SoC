@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { saveContactSubmission } from '../../../../lambda/database';
 
 // CORS headers
 const corsHeaders = {
@@ -38,7 +39,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the form submission (in production, this would be sent to AWS SES)
+    // Log the form submission
     console.log('Contact form submission received:', {
       name,
       email,
@@ -47,20 +48,41 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Save to database
+    try {
+      const result = await saveContactSubmission({
+        name,
+        email,
+        subject,
+        message
+      });
 
-    // For now, we'll just log and return success
-    // In production, this would trigger AWS SES to send emails
-    console.log(`Contact form submitted by ${name} (${email}): ${subject}`);
+      if (result.success) {
+        console.log(`Contact form submitted by ${name} (${email}): ${subject}`);
+        console.log(`Saved to database with ID: ${result.submissionId}`);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Thank you for your message! We\'ll get back to you soon.',
-      },
-      { status: 200, headers: corsHeaders }
-    );
+        return NextResponse.json(
+          {
+            success: true,
+            message: 'Thank you for your message! We\'ll get back to you soon.',
+            submissionId: result.submissionId
+          },
+          { status: 200, headers: corsHeaders }
+        );
+      } else {
+        console.error('Failed to save contact submission to database');
+        return NextResponse.json(
+          { error: 'Failed to save submission' },
+          { status: 500, headers: corsHeaders }
+        );
+      }
+    } catch (dbError) {
+      console.error('Database error:', dbError);
+      return NextResponse.json(
+        { error: 'Database error occurred' },
+        { status: 500, headers: corsHeaders }
+      );
+    }
 
   } catch (error) {
     console.error('Error processing contact form:', error);

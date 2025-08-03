@@ -12,10 +12,16 @@ export default function HomePage() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   
-  const shortDesc = `SoCTeamup Semiconductors Pvt Ltd is a DPIIT recognized startup which envisions to redefine SoC design, aiming to create an IC design services platform which is at par with software development/IT services, maximize visibility of every skilled resource in the semiconductor realm, and democratize IC design process through development of open-source and hybrid EDA design flows.`;
-  const fullDesc = `SoCTeamup Semiconductors Pvt Ltd is a DPIIT recognized startup which envisions to redefine SoC design, aiming to create an IC design services platform which is at par with software development/IT services, maximize visibility of every skilled resource in the semiconductor realm, and democratize IC design process through development of open-source and hybrid EDA design flows.
+  const shortDesc = `SoCTeamup Semiconductors Pvt. Ltd. is a deeptech startup and a full-spectrum semiconductor company, delivering comprehensive solutions across the chip design landscape—from advanced IP development and AI-driven EDA automation to edge AI-enabled systems.`;
+  const fullDesc = `SoCTeamup Semiconductors Pvt. Ltd. is a deeptech startup and a full-spectrum semiconductor company, delivering comprehensive solutions across the chip design landscape—from advanced IP development and AI-driven EDA automation to edge AI-enabled systems.
 
-Specializing in the development of cutting-edge Intellectual Properties (IPs), SoCTeamup Semiconductors leads the way in pioneering solutions, particularly in the Design for Test (DFT) space. Our dedicated team of experts leverages state-of-the-art technologies and methodologies to create innovative designs that enhance testability, reliability, and overall product performance with shortest time for end to end DFT Architecture planning and implementation.`;
+SoCTeamup Semiconductors specializes in the development of cutting-edge semiconductor IPs, particularly in the Design-for-Test (DFT) domain, including logic and memory BIST, scan compression, boundary scan, and secure test access controllers. Proprietary in-house tools are used to enable automated DFT architecture planning, reducing design complexity and accelerating silicon readiness.
+
+In addition to IP development, SoCTeamup Semiconductors offers SoC design services, supporting clients across RTL design, verification, physical implementation, and DFT insertion. Turnkey project execution is also delivered, combining domain expertise with industry-standard methodologies to ensure seamless end-to-end delivery.
+
+At the system level, the FotonixAI vertical of SoCTeamup Semiconductors focuses on building AI-powered edge solutions for security, surveillance, and automation—ranging from face recognition access barriers and smart kiosks to intelligent video analytics systems, all developed and deployed entirely in-house.
+
+With a proven track record of execution from 2nm to mature nodes, SoCTeamup Semiconductors integrates silicon, software, and system-level innovation to power the future of electronics.`;
 
   const toggleCardExpansion = (cardId: string) => {
     setExpandedCard(expandedCard === cardId ? null : cardId);

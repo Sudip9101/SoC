@@ -65,54 +65,61 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get users (in production, query from database)
-    const users = getMockUsers();
+    // Authenticate user from database
+    try {
+      const { getUserByEmailAndPassword, logAuthAction } = require('../../../../../lambda/database');
+      
+      // Find user by email and password
+      const user = await getUserByEmailAndPassword(email, password);
+      if (!user) {
+        return NextResponse.json(
+          { error: 'Invalid email or password' },
+          { status: 401, headers: corsHeaders }
+        );
+      }
 
-    // Find user by email
-    const user = users.find(u => u.email === email);
-    if (!user) {
+      // Log successful login
+      await logAuthAction({
+        user_id: user.id,
+        action: 'login',
+        ip_address: '127.0.0.1',
+        user_agent: 'Login Form',
+        success: true
+      });
+
+      console.log('✅ User login successful:', {
+        userId: user.id,
+        email: user.email,
+        name: user.name,
+        timestamp: new Date().toISOString(),
+      });
+
+      // Generate JWT token (in production, use proper JWT library)
+      const mockToken = `mock_jwt_${user.id}_${Date.now()}`;
+
       return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401, headers: corsHeaders }
-      );
-    }
-
-    // Verify password (in production, use bcrypt.compare)
-    if (user.password !== password) {
-      return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401, headers: corsHeaders }
-      );
-    }
-
-    // Log successful login
-    console.log('User login successful:', {
-      userId: user.userId,
-      email: user.email,
-      timestamp: new Date().toISOString(),
-    });
-
-    // Simulate JWT token (in production, use proper JWT library)
-    const mockToken = `mock_jwt_${user.userId}_${Date.now()}`;
-
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Login successful!',
-        token: mockToken,
-        user: {
-          userId: user.userId,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          lastLogin: new Date().toISOString(),
+        {
+          success: true,
+          message: 'Login successful!',
+          token: mockToken,
+          user: {
+            userId: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            lastLogin: new Date().toISOString(),
+          },
         },
-      },
-      { status: 200, headers: corsHeaders }
-    );
+        { status: 200, headers: corsHeaders }
+      );
+
+    } catch (dbError) {
+      console.error('❌ Database error during login:', dbError);
+      return NextResponse.json(
+        { error: 'Database error occurred during login' },
+        { status: 500, headers: corsHeaders }
+      );
+    }
 
   } catch (error) {
     console.error('Error processing login:', error);

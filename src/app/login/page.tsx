@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Lock, Eye, EyeOff, Github, Chrome, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Loader2, CheckCircle, XCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -94,94 +94,7 @@ export default function LoginPage() {
     });
   };
 
-  const handleGoogleLogin = async () => {
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-    setErrorMessage('');
 
-    try {
-      // Get Google auth URL
-      const response = await fetch('/api/auth/google/auth-url', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to get Google auth URL');
-      }
-
-      // Check if this is a development mock URL
-      if (result.authUrl.includes('google_auth=true')) {
-        // Handle mock Google authentication for development
-        const urlParams = new URLSearchParams(result.authUrl.split('?')[1]);
-        const mockCode = urlParams.get('code');
-        
-        if (mockCode) {
-          // Simulate OAuth callback with mock code
-          const callbackResponse = await fetch('/api/auth/google/callback', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ code: mockCode }),
-          });
-
-          const callbackResult = await callbackResponse.json();
-
-          if (!callbackResponse.ok) {
-            throw new Error(callbackResult.error || 'Google authentication failed');
-          }
-
-          // Success
-          setSubmitStatus('success');
-          
-          // Store token and user info
-          if (callbackResult.token) {
-            localStorage.setItem('authToken', callbackResult.token);
-            localStorage.setItem('user', JSON.stringify(callbackResult.user));
-          }
-
-          // Reset form
-          setFormData({ email: '', password: '', confirmPassword: '', name: '' });
-          
-          // Show success message for 2 seconds then redirect to dashboard
-          setTimeout(() => {
-            setSubmitStatus('idle');
-            // Redirect to dashboard
-            window.location.href = '/dashboard';
-          }, 2000);
-        }
-      } else {
-        // Redirect to real Google OAuth URL
-        window.location.href = result.authUrl;
-      }
-
-    } catch (error) {
-      console.error('Error with Google login:', error);
-      setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Google authentication failed');
-      
-      setTimeout(() => {
-        setSubmitStatus('idle');
-        setErrorMessage('');
-      }, 10000);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleSocialLogin = (provider: string) => {
-    if (provider === 'Google') {
-      handleGoogleLogin();
-    } else {
-      // TODO: Implement other OAuth providers
-      alert(`${provider} login will be integrated with serverless functions`);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -200,38 +113,7 @@ export default function LoginPage() {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 
-          {/* Social Login Buttons */}
-          <div className="space-y-3 mb-6">
-            <button
-              onClick={() => handleSocialLogin('Google')}
-              disabled={isSubmitting}
-              className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? (
-                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              ) : (
-                <Chrome className="w-5 h-5 mr-2" />
-              )}
-              {isSubmitting ? 'Connecting...' : 'Continue with Google'}
-            </button>
-            <button
-              onClick={() => handleSocialLogin('GitHub')}
-              disabled={isSubmitting}
-              className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <Github className="w-5 h-5 mr-2" />
-              Continue with GitHub
-            </button>
-          </div>
 
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with email</span>
-            </div>
-          </div>
 
           {/* Login/Register Form */}
           <form onSubmit={handleSubmit} className="space-y-6">

@@ -9,10 +9,7 @@ const dbConfig = {
   database: process.env.DB_NAME || 'socteamup_db',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0,
-  acquireTimeout: 60000,
-  timeout: 60000,
-  reconnect: true
+  queueLimit: 0
 };
 
 // Create connection pool
@@ -41,12 +38,12 @@ const testConnection = async () => {
 // User management functions
 const createUser = async (userData) => {
   const pool = getPool();
-  const { email, name, google_id, avatar_url } = userData;
+  const { email, name, password_hash, google_id, avatar_url } = userData;
   
   try {
     const [result] = await pool.execute(
-      'INSERT INTO users (email, name, google_id, avatar_url) VALUES (?, ?, ?, ?)',
-      [email, name, google_id, avatar_url]
+      'INSERT INTO users (email, name, password_hash, google_id, avatar_url) VALUES (?, ?, ?, ?, ?)',
+      [email, name, password_hash || null, google_id || null, avatar_url || null]
     );
     return { success: true, userId: result.insertId };
   } catch (error) {
@@ -117,7 +114,9 @@ const logAuthAction = async (logData) => {
 // Contact form submissions
 const saveContactSubmission = async (submissionData) => {
   const pool = getPool();
-  const { name, email, phone, company, subject, message } = submissionData;
+  const { name, email, subject, message } = submissionData;
+  const phone = submissionData.phone || null;
+  const company = submissionData.company || null;
   
   try {
     const [result] = await pool.execute(
@@ -126,6 +125,7 @@ const saveContactSubmission = async (submissionData) => {
     );
     return { success: true, submissionId: result.insertId };
   } catch (error) {
+    console.error('Database error in saveContactSubmission:', error);
     throw error;
   }
 };
@@ -134,8 +134,7 @@ const getContactSubmissions = async (limit = 50, offset = 0) => {
   const pool = getPool();
   try {
     const [rows] = await pool.execute(
-      'SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT ? OFFSET ?',
-      [limit, offset]
+      `SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT ${Number(limit)} OFFSET ${Number(offset)}`
     );
     return rows;
   } catch (error) {
@@ -156,6 +155,33 @@ const updateContactSubmissionStatus = async (id, status) => {
   }
 };
 
+// Password authentication functions
+const authenticateUser = async (email, password_hash) => {
+  const pool = getPool();
+  try {
+    const [rows] = await pool.execute(
+      'SELECT * FROM users WHERE email = ? AND password_hash = ? AND is_active = TRUE',
+      [email, password_hash]
+    );
+    return rows[0] || null;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getUserByEmailAndPassword = async (email, password_hash) => {
+  const pool = getPool();
+  try {
+    const [rows] = await pool.execute(
+      'SELECT * FROM users WHERE email = ? AND password_hash = ?',
+      [email, password_hash]
+    );
+    return rows[0] || null;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getPool,
   testConnection,
@@ -166,5 +192,7 @@ module.exports = {
   logAuthAction,
   saveContactSubmission,
   getContactSubmissions,
-  updateContactSubmissionStatus
+  updateContactSubmissionStatus,
+  authenticateUser,
+  getUserByEmailAndPassword
 }; 
