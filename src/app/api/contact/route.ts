@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveContactSubmission } from '../../../../lambda/database';
+import { saveContactSubmission } from '../../../lib/database';
 
 // CORS headers
 const corsHeaders = {

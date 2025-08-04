@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     // Check if user already exists in database
     try {
-      const { createUser, getUserByEmail, logAuthAction } = require('../../../../../lambda/database');
+      const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
       
       const existingUser = await getUserByEmail(email);
       if (existingUser) {

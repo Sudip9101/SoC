@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
       // Save user to database
       try {
-        const { createUser, getUserByEmail, logAuthAction } = require('../../../../../lambda/database');
+        const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
         
         // Check if user already exists
         let existingUser = await getUserByEmail(mockGoogleUser.email);
@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
 
         // Save real Google user to database
         try {
-          const { createUser, getUserByEmail, logAuthAction } = require('../../../../../lambda/database');
+          const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
           
           let existingUser = await getUserByEmail(googleUser.email);
           let userId;

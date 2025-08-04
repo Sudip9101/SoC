@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
 
     // Authenticate user from database
     try {
-      const { getUserByEmailAndPassword, logAuthAction } = require('../../../../../lambda/database');
+      const { getUserByEmailAndPassword, logAuthAction } = require('../../../../lib/database');
       
       // Find user by email and password
       const user = await getUserByEmailAndPassword(email, password);
