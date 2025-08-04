@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';
+const mysql = require('mysql2/promise');
 
 // Database configuration
 const dbConfig = {
@@ -13,9 +13,9 @@ const dbConfig = {
 };
 
 // Create connection pool
-let pool: mysql.Pool | null = null;
+let pool: any = null;
 
-const getPool = (): mysql.Pool => {
+const getPool = (): any => {
   if (!pool) {
     pool = mysql.createPool(dbConfig);
   }
