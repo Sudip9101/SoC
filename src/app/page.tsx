@@ -37,44 +37,32 @@ With a proven track record of execution from 2nm to mature nodes, SoCTeamup Semi
       
       const tryAutoplay = async () => {
         try {
-          // Start with muted autoplay (browser-friendly)
           video.muted = true;
           video.currentTime = 0;
-          video.volume = 0.7; // Pre-set volume for when unmuted
+          video.volume = 0.7;
           await video.play();
-          console.log('Video started playing (muted autoplay)');
           setIsVideoPlaying(true);
-          
-          // Keep playing muted - user can manually unmute using controls
-          console.log('Video is playing muted. Use controls to enable sound.');
-          
         } catch (error) {
-          console.log('Autoplay failed, user interaction required:', error);
-          video.muted = false; // Unmute for manual play
+          video.muted = false;
           setIsVideoPlaying(false);
         }
       };
 
       const onLoadedData = () => {
-        console.log('Video loaded, attempting autoplay...');
         tryAutoplay();
       };
       
       const onCanPlay = () => {
-        console.log('Video can play');
         if (video.paused) {
           tryAutoplay();
         }
       };
 
-      // Ensure video keeps playing when state changes
       const onPause = () => {
-        console.log('Video paused');
         setIsVideoPlaying(false);
       };
 
       const onPlay = () => {
-        console.log('Video playing');
         setIsVideoPlaying(true);
       };
       
@@ -98,23 +86,18 @@ With a proven track record of execution from 2nm to mature nodes, SoCTeamup Semi
   const handlePlayClick = async () => {
     if (videoRef.current) {
       try {
-        // When user clicks, enable sound and play
         videoRef.current.muted = false;
         videoRef.current.volume = 0.7;
-        videoRef.current.currentTime = 0; // Restart from beginning
+        videoRef.current.currentTime = 0;
         await videoRef.current.play();
         setIsVideoPlaying(true);
-        console.log('Video started with sound via user interaction');
       } catch (error) {
-        console.log('Manual play failed:', error);
-        // If that fails, try muted play
         try {
           videoRef.current.muted = true;
           await videoRef.current.play();
           setIsVideoPlaying(true);
-          console.log('Video started muted as fallback');
         } catch (mutedError) {
-          console.log('Even muted play failed:', mutedError);
+          // Video playback failed
         }
       }
     }
@@ -600,13 +583,13 @@ With a proven track record of execution from 2nm to mature nodes, SoCTeamup Semi
             </p>
           </div>
 
-          {/* Direct Clients */}
+          {/* Partners */}
           <div className="mb-12">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">Direct Clients</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">Partners</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 items-center">
+              {/* Logo-based clients */}
               {[
                 { name: 'Scaleflux India', logo: '/logo/scale-flux.avif' },
-                { name: 'HCL Technologies', logo: '/logo/hcl.png' },
                 { name: 'Tessolve', logo: '/logo/tessolve.jpg' },
                 { name: 'Cyient', logo: '/logo/cyient-logo-vector.png' },
                 { name: 'USTGlobal', logo: '/logo/UST_Global_Logo.jpg' },
@@ -633,6 +616,8 @@ With a proven track record of execution from 2nm to mature nodes, SoCTeamup Semi
                   </div>
                 </div>
               ))}
+              
+
             </div>
           </div>
 

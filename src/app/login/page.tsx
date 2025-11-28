@@ -53,10 +53,8 @@ export default function LoginPage() {
         throw new Error(result.error || `HTTP error! status: ${response.status}`);
       }
 
-      // Success
       setSubmitStatus('success');
       
-      // Store token in localStorage (in production, consider more secure storage)
       if (result.token) {
         localStorage.setItem('authToken', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));

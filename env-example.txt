@@ -1,0 +1,62 @@
+# =========================================
+# SoCTeamUp Production Environment Variables
+# =========================================
+# IMPORTANT: Copy this file and update with actual values
+# DO NOT commit actual .env file with passwords to version control!
+#
+# Usage:
+#   1. Copy this file: cp env-example.txt .env
+#   2. Update values below with real credentials
+#   3. Keep .env file secure and private
+# =========================================
+
+# DATABASE PASSWORDS
+# =========================================
+# SECURITY: Change these from defaults!
+# Generate strong passwords (20+ characters, mixed case, numbers, symbols)
+# Example: openssl rand -base64 24
+MYSQL_ROOT_PASSWORD=your-strong-root-password-here
+MYSQL_PASSWORD=your-strong-db-password-here
+
+# EMAIL / SMTP CONFIGURATION
+# =========================================
+# For Gmail: Get App Password at https://myaccount.google.com/apppasswords
+#   1. Enable 2-Step Verification
+#   2. Generate App Password
+#   3. Use 16-character password (no spaces)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=socteamup28@gmail.com
+SMTP_PASS=your-gmail-app-password-16-chars
+SMTP_FROM=socteamup28@gmail.com
+SMTP_TO=admin@yourcompany.com
+
+# SECURITY - JWT SECRET
+# =========================================
+# Generate random 32+ character string
+# Example: openssl rand -base64 32
+JWT_SECRET=your-random-jwt-secret-minimum-32-characters
+
+# FRONTEND API URL
+# =========================================
+# For local/testing:
+FRONTEND_API_URL=http://localhost:3001
+#
+# For production with domain:
+# FRONTEND_API_URL=https://api.yourdomain.com
+#
+# For production with IP:
+# FRONTEND_API_URL=http://YOUR_SERVER_IP:3001
+
+# =========================================
+# NOTES:
+# =========================================
+# - All values must be updated before production
+# - Keep this file secure (add to .gitignore)
+# - Use strong, unique passwords
+# - Never share passwords in chat/email
+# - Backup this file securely
+# =========================================
+
+
+

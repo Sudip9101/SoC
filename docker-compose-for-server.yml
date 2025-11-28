@@ -1,0 +1,84 @@
+version: "3.9"
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: socteamup_db
+      MYSQL_USER: socteamup_user
+      MYSQL_PASSWORD: socteamup_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - socnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+
+  # Backend Service
+  backend:
+    image: rackssudip/socteamup-backend:latest
+    container_name: backend
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      # Database Configuration
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: socteamup_db
+      DB_USER: socteamup_user
+      DB_PASSWORD: socteamup_password
+      # Email Configuration
+      SMTP_ENABLED: "true"
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_SECURE: "false"
+      SMTP_USER: socteamup28@gmail.com
+      SMTP_PASS: cppmefbeqhzonknf
+      SMTP_FROM: socteamup28@gmail.com
+      SMTP_TO: socteamup28@gmail.com
+      # Security
+      JWT_SECRET: your-jwt-secret-change-in-production
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - socnet
+    restart: unless-stopped
+
+  # Frontend Service
+  frontend:
+    image: rackssudip/socteamup-frontend:latest
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    depends_on:
+      - backend
+    networks:
+      - socnet
+    restart: unless-stopped
+
+networks:
+  socnet:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+
+
+

@@ -1,0 +1,24 @@
+# Minimal Backend Container - Express Server only
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy minimal package.json
+COPY package-backend-minimal.json package.json
+
+# Install only minimal dependencies
+RUN npm install --production
+
+# Copy only the minimal server file
+COPY server-minimal.js .
+
+# Expose port
+EXPOSE 3001
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3001
+
+# Start the minimal server
+CMD ["npm", "start"] 

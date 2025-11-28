@@ -1,22 +1,33 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
-
-// Import Lambda functions
-const authHandler = require('./lambda/auth');
-const contactFormHandler = require('./lambda/contact-form');
-const googleAuthHandler = require('./lambda/google-auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'http://localhost:3002'],
+  origin: process.env.FRONTEND_URL || [
+    'http://localhost:3000', 
+    'http://localhost:3002',
+    'http://frontend:3000',
+    'http://127.0.0.1:3000'
+  ],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Import Lambda functions after Express setup
+let authHandler, contactFormHandler, googleAuthHandler;
+
+try {
+  authHandler = require('./lambda/auth');
+  contactFormHandler = require('./lambda/contact-form');
+  googleAuthHandler = require('./lambda/google-auth');
+} catch (error) {
+  console.error('Error loading lambda functions:', error);
+  process.exit(1);
+}
 
 // Helper function to convert Express request to Lambda event
 const expressToLambdaEvent = (req) => {
@@ -32,15 +43,20 @@ const expressToLambdaEvent = (req) => {
 
 // Helper function to convert Lambda response to Express response
 const lambdaToExpressResponse = (res, lambdaResponse) => {
-  const response = JSON.parse(lambdaResponse.body);
-  res.status(lambdaResponse.statusCode);
-  
-  // Set CORS headers
-  Object.keys(lambdaResponse.headers || {}).forEach(header => {
-    res.set(header, lambdaResponse.headers[header]);
-  });
-  
-  res.json(response);
+  try {
+    const response = JSON.parse(lambdaResponse.body);
+    res.status(lambdaResponse.statusCode);
+
+    // Set CORS headers
+    Object.keys(lambdaResponse.headers || {}).forEach(header => {
+      res.set(header, lambdaResponse.headers[header]);
+    });
+
+    res.json(response);
+  } catch (error) {
+    console.error('Error processing lambda response:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
 // Auth routes
@@ -62,17 +78,6 @@ app.post('/api/auth/login', async (req, res) => {
     lambdaToExpressResponse(res, result);
   } catch (error) {
     console.error('Auth login error:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-app.get('/api/auth/verify', async (req, res) => {
-  try {
-    const event = expressToLambdaEvent(req);
-    const result = await authHandler.handler(event);
-    lambdaToExpressResponse(res, result);
-  } catch (error) {
-    console.error('Auth verify error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -112,23 +117,45 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// Health check
+// Health check route
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    server: 'SocTeamUp Backend'
+  });
 });
 
-// Default route
+// Simple catch-all for undefined routes (avoid using '*')
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ 
+    error: 'API endpoint not found',
+    path: req.originalUrl,
+    method: req.method,
+    availableEndpoints: [
+      'POST /api/auth/register',
+      'POST /api/auth/login',
+      'GET  /api/auth/google/auth-url',
+      'POST /api/auth/google/callback',
+      'POST /api/contact',
+      'GET  /health'
+    ]
+  });
+});
+
+// Root route
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'SocTeamUp Backend API',
     version: '1.0.0',
+    status: 'running',
     endpoints: [
-      '/api/auth/register',
-      '/api/auth/login', 
-      '/api/auth/verify',
-      '/api/auth/google/auth-url',
-      '/api/auth/google/callback',
-      '/api/contact'
+      'POST /api/auth/register',
+      'POST /api/auth/login',
+      'GET  /api/auth/google/auth-url',
+      'POST /api/auth/google/callback',
+      'POST /api/contact',
+      'GET  /health'
     ]
   });
 });
@@ -136,12 +163,24 @@ app.get('/', (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  res.status(500).json({ 
+    error: 'Internal server error',
+    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
+  });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`SocTeamUp Backend Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
+// Start server - Listen on all interfaces (0.0.0.0) instead of localhost
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 SocTeamUp Backend Server running on port ${PORT}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔗 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
+  console.log(`📡 Server listening on all interfaces (0.0.0.0:${PORT})`);
+  console.log('📋 Available endpoints:');
+  console.log('   POST /api/auth/register');
+  console.log('   POST /api/auth/login');
+  console.log('   GET  /api/auth/google/auth-url');
+  console.log('   POST /api/auth/google/callback');
+  console.log('   POST /api/contact');
+  console.log('   GET  /health');
+  console.log('   GET  / (API info)');
 }); 

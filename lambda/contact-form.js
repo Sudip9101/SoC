@@ -3,13 +3,14 @@
  * This function processes form data, validates input, and sends notifications
  */
 
-const AWS = require('aws-sdk');
-const ses = new AWS.SES({ region: 'us-east-1' });
+// Commented out AWS SDK initialization due to credential issues
+// const AWS = require('aws-sdk');
+// const ses = new AWS.SES({ region: 'us-east-1' });
 const { saveContactSubmission } = require('./database');
 
 // CORS headers for frontend integration
 const corsHeaders = {
-  'Access-Control-Allow-Origin': process.env.FRONTEND_URL || 'https://socteamup.com',
+  'Access-Control-Allow-Origin': process.env.FRONTEND_URL || 'http://localhost:3000',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS'
 };
@@ -40,6 +41,8 @@ const validateInput = (data) => {
 };
 
 // Send email notification
+// Commented out due to AWS credentials issue
+/*
 const sendEmail = async (formData) => {
   const { name, email, subject, message } = formData;
   
@@ -86,8 +89,11 @@ const sendEmail = async (formData) => {
 
   return ses.sendEmail(emailParams).promise();
 };
+*/
 
 // Auto-reply to user
+// Commented out due to AWS credentials issue
+/*
 const sendAutoReply = async (userEmail, userName) => {
   const autoReplyParams = {
     Destination: {
@@ -98,9 +104,14 @@ const sendAutoReply = async (userEmail, userName) => {
         Html: {
           Data: `
             <h2>Thank you for contacting SocTeamUp!</h2>
-            <p>Hi ${userName},</p>
-            <p>We've received your message and will get back to you within 24 hours.</p>
-            <p>In the meantime, feel free to explore our platform and check out our developer documentation.</p>
+            <p>Dear ${userName},</p>
+            <p>We have received your message and will get back to you as soon as possible.</p>
+            <p>In the meantime, you can:</p>
+            <ul>
+              <li>Visit our website: <a href="https://socteamup.com">socteamup.com</a></li>
+              <li>Check out our latest updates</li>
+              <li>Follow us on social media</li>
+            </ul>
             <p>Best regards,<br>The SocTeamUp Team</p>
             <hr>
             <p><small>This is an automated response. Please do not reply to this email.</small></p>
@@ -110,11 +121,14 @@ const sendAutoReply = async (userEmail, userName) => {
           Data: `
             Thank you for contacting SocTeamUp!
             
-            Hi ${userName},
+            Dear ${userName},
             
-            We've received your message and will get back to you within 24 hours.
+            We have received your message and will get back to you as soon as possible.
             
-            In the meantime, feel free to explore our platform and check out our developer documentation.
+            In the meantime, you can:
+            - Visit our website: https://socteamup.com
+            - Check out our latest updates
+            - Follow us on social media
             
             Best regards,
             The SocTeamUp Team
@@ -133,6 +147,7 @@ const sendAutoReply = async (userEmail, userName) => {
 
   return ses.sendEmail(autoReplyParams).promise();
 };
+*/
 
 // Main Lambda handler
 exports.handler = async (event) => {
@@ -178,13 +193,29 @@ exports.handler = async (event) => {
     const dbResult = await saveContactSubmission(formData);
     console.log('Contact submission saved to database:', dbResult);
 
-    // Send notification email to team
-    await sendEmail(formData);
-    console.log('Notification email sent successfully');
+    // Try to send notification email to team (optional)
+    // Commented out for now due to AWS credentials issue
+    /*
+    try {
+      await sendEmail(formData);
+      console.log('Notification email sent successfully');
+    } catch (emailError) {
+      console.log('Email sending failed (non-critical):', emailError.message);
+      // Don't fail the request if email fails
+    }
+    */
 
-    // Send auto-reply to user
-    await sendAutoReply(formData.email, formData.name);
-    console.log('Auto-reply sent successfully');
+    // Try to send auto-reply to user (optional)
+    // Commented out for now due to AWS credentials issue
+    /*
+    try {
+      await sendAutoReply(formData.email, formData.name);
+      console.log('Auto-reply sent successfully');
+    } catch (autoReplyError) {
+      console.log('Auto-reply sending failed (non-critical):', autoReplyError.message);
+      // Don't fail the request if auto-reply fails
+    }
+    */
 
     return {
       statusCode: 200,

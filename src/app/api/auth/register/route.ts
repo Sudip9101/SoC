@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-// Database functions will be imported using require
+import bcrypt from 'bcryptjs';
+import { testConnection, createUser, getUserByEmail, logAuthAction } from '@/lib/database';
 
 // CORS headers
 const corsHeaders = {
@@ -16,9 +17,6 @@ export async function OPTIONS() {
   });
 }
 
-// Simple in-memory storage for development (use database in production)
-const users: any[] = [];
-
 // Input validation
 const validateEmail = (email: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,8 +27,20 @@ const validatePassword = (password: string) => {
   return password.length >= 5; // Temporarily reduced for testing
 };
 
+// Extract client IP and user agent
+const getClientInfo = (request: NextRequest) => {
+  const forwarded = request.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0] : 
+            request.headers.get('x-real-ip') || 
+            '127.0.0.1';
+  const userAgent = request.headers.get('user-agent') || 'Unknown';
+  return { ip, userAgent };
+};
+
 // Handle POST requests
 export async function POST(request: NextRequest) {
+  const { ip, userAgent } = getClientInfo(request);
+  
   try {
     const body = await request.json();
     const { name, email, password, confirmPassword } = body;
@@ -47,7 +57,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!password || !validatePassword(password)) {
-      errors.push('Password must be at least 8 characters long');
+      errors.push('Password must be at least 5 characters long');
     }
 
     if (password !== confirmPassword) {
@@ -61,80 +71,62 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if user already exists in database
-    try {
-      const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
-      
-      const existingUser = await getUserByEmail(email);
-      if (existingUser) {
-        return NextResponse.json(
-          { error: 'User already exists with this email address' },
-          { status: 409, headers: corsHeaders }
-        );
-      }
-
-      // Create new user in database
-      const createResult = await createUser({
-        email,
-        name,
-        password_hash: password, // In production, hash this password
-        role: 'user'
-      });
-
-      if (!createResult.success) {
-        return NextResponse.json(
-          { error: createResult.error || 'Failed to create user' },
-          { status: 500, headers: corsHeaders }
-        );
-      }
-
-      // Log registration action
-      await logAuthAction({
-        user_id: createResult.userId,
-        action: 'register',
-        ip_address: '127.0.0.1',
-        user_agent: 'Registration Form',
-        success: true
-      });
-
-      console.log('✅ User registration successful:', {
-        userId: createResult.userId,
-        name,
-        email,
-        timestamp: new Date().toISOString(),
-      });
-
-      // Generate JWT token (in production, use proper JWT library)
-      const mockToken = `mock_jwt_${createResult.userId}_${Date.now()}`;
-
+    const existingUser = await getUserByEmail(email);
+    if (existingUser) {
       return NextResponse.json(
-        {
-          success: true,
-          message: 'Registration successful!',
-          token: mockToken,
-          user: {
-            userId: createResult.userId,
-            email,
-            name,
-            createdAt: new Date().toISOString(),
-          },
-        },
-        { status: 201, headers: corsHeaders }
-      );
-
-    } catch (dbError) {
-      console.error('❌ Database error during registration:', dbError);
-      return NextResponse.json(
-        { error: 'Database error occurred during registration' },
-        { status: 500, headers: corsHeaders }
+        { error: 'User already exists with this email address' },
+        { status: 409, headers: corsHeaders }
       );
     }
+
+    // Hash the password securely
+    const saltRounds = 12;
+    const password_hash = await bcrypt.hash(password, saltRounds);
+
+    const result = await createUser({
+      email: email.toLowerCase().trim(),
+      name: name.trim(),
+      password_hash
+    });
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.error || 'Failed to create user' },
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    await logAuthAction({
+      user_id: result.userId,
+      action: 'register',
+      ip_address: ip,
+      user_agent: userAgent,
+      success: true
+    });
+
+    const mockToken = `mock_jwt_${result.userId}_${Date.now()}`;
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Registration successful! You can now log in.',
+        token: mockToken,
+        user: {
+          userId: result.userId,
+          email: email.toLowerCase().trim(),
+          name: name.trim(),
+          role: 'user',
+          createdAt: new Date().toISOString(),
+        },
+      },
+      { status: 201, headers: corsHeaders }
+    );
 
   } catch (error) {
     console.error('Error processing registration:', error);
     
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error. Please try again later.' },
       { status: 500, headers: corsHeaders }
     );
   }

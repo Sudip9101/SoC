@@ -20,19 +20,14 @@ export async function GET(request: NextRequest) {
 
       const authUrl = `${baseUrl}?${params.toString()}`;
       
-      console.log('Generated real Google auth URL:', authUrl);
-      
       return NextResponse.json({
         authUrl,
         message: 'Redirect user to this URL for Google authentication'
       });
     }
     
-    // Fallback to mock for development if no real credentials
     if (process.env.NODE_ENV === 'development') {
       const mockAuthUrl = `${request.nextUrl.origin}/login?google_auth=true&code=mock_auth_code_${Date.now()}`;
-      
-      console.log('Generated Google auth URL (development):', mockAuthUrl);
       
       return NextResponse.json({
         authUrl: mockAuthUrl,

@@ -39,16 +39,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the form submission
-    console.log('Contact form submission received:', {
-      name,
-      email,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
-    });
-
-    // Save to database
     try {
       const result = await saveContactSubmission({
         name,
@@ -58,9 +48,6 @@ export async function POST(request: NextRequest) {
       });
 
       if (result.success) {
-        console.log(`Contact form submitted by ${name} (${email}): ${subject}`);
-        console.log(`Saved to database with ID: ${result.submissionId}`);
-
         return NextResponse.json(
           {
             success: true,
@@ -70,7 +57,6 @@ export async function POST(request: NextRequest) {
           { status: 200, headers: corsHeaders }
         );
       } else {
-        console.error('Failed to save contact submission to database');
         return NextResponse.json(
           { error: 'Failed to save submission' },
           { status: 500, headers: corsHeaders }

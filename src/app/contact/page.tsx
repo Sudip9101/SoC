@@ -22,9 +22,30 @@ export default function ContactPage() {
     setErrorMessage('');
 
     try {
-      // Use local API endpoint for development, AWS Lambda for production
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-      const endpoint = apiUrl ? `${apiUrl}/api/contact` : '/api/contact';
+      // Smart API URL detection for different environments
+      let apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      
+      if (!apiUrl) {
+        // Auto-detect based on environment
+        if (typeof window !== 'undefined') {
+          const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+          const currentHost = window.location.hostname;
+          const currentPort = window.location.port;
+          
+          if (isLocalhost) {
+            // Local development - use localhost
+            apiUrl = 'http://localhost:3001';
+          } else {
+            // Production/Docker - use same host with backend port
+            apiUrl = `http://${currentHost}:3001`;
+          }
+        } else {
+          // Server-side rendering fallback
+          apiUrl = 'http://localhost:3001';
+        }
+      }
+      
+      const endpoint = `${apiUrl}/api/contact`;
 
       const response = await fetch(endpoint, {
         method: 'POST',

@@ -1,0 +1,35 @@
+{
+  "name": "socteamup-backend",
+  "version": "2.0.0",
+  "description": "SoCTeamup Backend API with MySQL Integration",
+  "main": "server-production.js",
+  "scripts": {
+    "start": "node server-production.js",
+    "dev": "nodemon server-production.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "socteamup",
+    "backend",
+    "api",
+    "mysql",
+    "authentication",
+    "express"
+  ],
+  "author": "SoCTeamup",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "mysql2": "^3.6.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+} 

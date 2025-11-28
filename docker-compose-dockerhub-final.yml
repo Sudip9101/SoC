@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: socteamup-mysql-dockerhub
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_secure_2024
+      MYSQL_DATABASE: socteamup_db
+      MYSQL_USER: socteamup_user
+      MYSQL_PASSWORD: socteamup_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - socteamup-network
+
+  # Backend Service - LATEST VERSION FROM DOCKER HUB
+  backend:
+    image: rackssudip/socteamup-backend:latest
+    container_name: socteamup-backend-dockerhub
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=socteamup_user
+      - DB_PASSWORD=socteamup_password
+      - DB_NAME=socteamup_db
+    ports:
+      - "3001:3001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - socteamup-network
+
+  # Frontend Service - WORKING VERSION FROM DOCKER HUB
+  frontend:
+    image: rackssudip/socteamup-frontend:latest
+    container_name: socteamup-frontend-dockerhub
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - socteamup-network
+
+volumes:
+  mysql_data:
+
+networks:
+  socteamup-network:
+    driver: bridge 

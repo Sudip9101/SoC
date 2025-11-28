@@ -44,14 +44,29 @@ body {
 }
 
 /* Smooth transitions for all interactive elements */
-* {
+/* Removed global transition to prevent flickering - will apply specific transitions where needed */
+/* * {
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
-}
+} */
 
 /* Focus styles for accessibility */
 *:focus {
   outline: 2px solid var(--primary-500);
   outline-offset: 2px;
+}
+
+/* Disable transitions for modal content to prevent flickering */
+.no-transition {
+  transition: none !important;
+}
+
+.no-transition * {
+  transition: none !important;
+}
+
+/* Specific transitions for interactive elements */
+button, a, .hover-transition {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 /* Scrollbar customization */

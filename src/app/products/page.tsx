@@ -37,9 +37,6 @@ export default function ProductsPage() {
             <h2 className="text-sm font-semibold text-sky-600 uppercase tracking-wide mb-4">
               PRODUCTS AND SOLUTIONS
             </h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-              Compute Platform Components
-            </h3>
           </div>
 
                      {/* Product Grid */}

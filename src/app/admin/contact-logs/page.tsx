@@ -15,8 +15,6 @@ export default function ContactLogsPage() {
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
 
   useEffect(() => {
-    // In a real application, this would fetch from a database
-    // For now, we'll show a placeholder
     const mockSubmissions: ContactSubmission[] = [
       {
         name: 'Sudip Das',

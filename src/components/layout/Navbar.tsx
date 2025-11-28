@@ -76,7 +76,7 @@ const Navbar = () => {
           { name: 'Dashboard', href: '/dashboard' },
         ]
     : [
-        { name: 'Login', href: '/login' },
+        { name: 'Login', href: 'https://socteamup.odoo.com/odoo' },
       ];
 
   const productLinks = [

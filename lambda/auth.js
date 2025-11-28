@@ -3,17 +3,24 @@
  * Handles registration, login, JWT token generation, and user management
  */
 
-const AWS = require('aws-sdk');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-const ses = new AWS.SES({ region: 'us-east-1' });
+// Import database functions
+const { 
+  createUser, 
+  getUserByEmail, 
+  getUserById, 
+  updateUser, 
+  logAuthAction,
+  authenticateUser,
+  getUserByEmailAndPassword
+} = require('./database');
 
 // CORS headers for frontend integration
 const corsHeaders = {
-  'Access-Control-Allow-Origin': process.env.FRONTEND_URL || 'https://socteamup.com',
+  'Access-Control-Allow-Origin': process.env.FRONTEND_URL || 'http://localhost:3000',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS'
 };
@@ -76,126 +83,49 @@ const verifyToken = (token) => {
   }
 };
 
-// Check if user exists
-const getUserByEmail = async (email) => {
-  const params = {
-    TableName: process.env.USERS_TABLE,
-    IndexName: 'email-index',
-    KeyConditionExpression: 'email = :email',
-    ExpressionAttributeValues: {
-      ':email': email
-    }
-  };
-
-  const result = await dynamodb.query(params).promise();
-  return result.Items.length > 0 ? result.Items[0] : null;
+// Check if user exists (using imported function)
+const checkUserByEmail = async (email) => {
+  return await getUserByEmail(email);
 };
 
 // Create new user
-const createUser = async (userData) => {
-  const userId = uuidv4();
+const createNewUser = async (userData) => {
   const hashedPassword = await bcrypt.hash(userData.password, 12);
 
-  const user = {
-    userId,
+  const userDataForDB = {
     email: userData.email,
     name: userData.name,
-    password: hashedPassword,
-    createdAt: new Date().toISOString(),
-    isVerified: false,
-    loginCount: 0,
-    lastLogin: null
+    password_hash: hashedPassword
   };
 
-  const params = {
-    TableName: process.env.USERS_TABLE,
-    Item: user
-  };
-
-  await dynamodb.put(params).promise();
-  
-  // Remove password from response
-  delete user.password;
-  return user;
+  return await createUser(userDataForDB);
 };
 
 // Update user login info
 const updateUserLogin = async (userId) => {
-  const params = {
-    TableName: process.env.USERS_TABLE,
-    Key: { userId },
-    UpdateExpression: 'SET lastLogin = :lastLogin, loginCount = loginCount + :inc',
-    ExpressionAttributeValues: {
-      ':lastLogin': new Date().toISOString(),
-      ':inc': 1
-    }
+  const updates = {
+    last_login: new Date().toISOString(),
+    login_count: 1  // Increment login count
   };
 
-  await dynamodb.update(params).promise();
+  await updateUser(userId, updates);
 };
 
-// Send welcome email
+// Send welcome email (placeholder - can be implemented later)
 const sendWelcomeEmail = async (email, name) => {
-  const emailParams = {
-    Destination: {
-      ToAddresses: [email]
-    },
-    Message: {
-      Body: {
-        Html: {
-          Data: `
-            <h2>Welcome to SocTeamUp!</h2>
-            <p>Hi ${name},</p>
-            <p>Thank you for joining SocTeamUp! We're excited to have you as part of our semiconductor design community.</p>
-            <p>Here's what you can do next:</p>
-            <ul>
-              <li>Explore our developer documentation</li>
-              <li>Check out our latest semiconductor solutions</li>
-              <li>Connect with our team for custom projects</li>
-            </ul>
-            <p>If you have any questions, feel free to reach out to us anytime.</p>
-            <p>Best regards,<br>The SocTeamUp Team</p>
-            <hr>
-            <p><small>Visit us at <a href="${process.env.FRONTEND_URL}">socteamup.com</a></small></p>
-          `
-        },
-        Text: {
-          Data: `
-            Welcome to SocTeamUp!
-            
-            Hi ${name},
-            
-            Thank you for joining SocTeamUp! We're excited to have you as part of our semiconductor design community.
-            
-            Here's what you can do next:
-            - Explore our developer documentation
-            - Check out our latest semiconductor solutions
-            - Connect with our team for custom projects
-            
-            If you have any questions, feel free to reach out to us anytime.
-            
-            Best regards,
-            The SocTeamUp Team
-            
-            Visit us at ${process.env.FRONTEND_URL}
-          `
-        }
-      },
-      Subject: {
-        Data: 'Welcome to SocTeamUp!'
-      }
-    },
-    Source: process.env.FROM_EMAIL || 'noreply@socteamup.com'
-  };
-
-  return ses.sendEmail(emailParams).promise();
+  console.log(`Welcome email would be sent to ${email} for user ${name}`);
+  // Email functionality can be implemented later
+  return Promise.resolve();
 };
 
 // Handle user registration
 const handleRegister = async (data) => {
+  console.log('Starting registration process for:', data.email);
+  
   // Validate input
   const validationErrors = validateInput(data, 'register');
   if (validationErrors.length > 0) {
+    console.log('Validation errors:', validationErrors);
     return {
       statusCode: 400,
       headers: corsHeaders,
@@ -206,9 +136,12 @@ const handleRegister = async (data) => {
     };
   }
 
+  console.log('Validation passed, checking if user exists...');
+
   // Check if user already exists
-  const existingUser = await getUserByEmail(data.email);
+  const existingUser = await checkUserByEmail(data.email);
   if (existingUser) {
+    console.log('User already exists:', data.email);
     return {
       statusCode: 409,
       headers: corsHeaders,
@@ -218,19 +151,46 @@ const handleRegister = async (data) => {
     };
   }
 
+  console.log('User does not exist, creating new user...');
+
   // Create new user
-  const user = await createUser(data);
+  const result = await createNewUser(data);
+  console.log('Create user result:', result);
+  
+  if (!result.success) {
+    console.log('Failed to create user:', result.error);
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({
+        error: result.error || 'Failed to create user'
+      })
+    };
+  }
+
+  const user = {
+    userId: result.userId,
+    email: data.email,
+    name: data.name,
+    createdAt: new Date().toISOString()
+  };
+  
+  console.log('User created successfully, generating token...');
   
   // Generate JWT token
   const token = generateToken(user.userId, user.email);
+  console.log('Token generated successfully');
 
   // Send welcome email
   try {
     await sendWelcomeEmail(user.email, user.name);
+    console.log('Welcome email sent');
   } catch (emailError) {
     console.error('Failed to send welcome email:', emailError);
     // Don't fail registration if email fails
   }
+
+  console.log('Registration completed successfully');
 
   return {
     statusCode: 201,
@@ -251,9 +211,12 @@ const handleRegister = async (data) => {
 
 // Handle user login
 const handleLogin = async (data) => {
+  console.log('Starting login process for:', data.email);
+  
   // Validate input
   const validationErrors = validateInput(data, 'login');
   if (validationErrors.length > 0) {
+    console.log('Login validation errors:', validationErrors);
     return {
       statusCode: 400,
       headers: corsHeaders,
@@ -264,9 +227,12 @@ const handleLogin = async (data) => {
     };
   }
 
-  // Get user by email
+  console.log('Login validation passed, checking user credentials...');
+
+  // Get user by email first
   const user = await getUserByEmail(data.email);
   if (!user) {
+    console.log('User not found:', data.email);
     return {
       statusCode: 401,
       headers: corsHeaders,
@@ -276,9 +242,12 @@ const handleLogin = async (data) => {
     };
   }
 
-  // Verify password
-  const isValidPassword = await bcrypt.compare(data.password, user.password);
-  if (!isValidPassword) {
+  console.log('User found, verifying password...');
+
+  // Verify password using bcrypt.compare
+  const isPasswordValid = await bcrypt.compare(data.password, user.password_hash);
+  if (!isPasswordValid) {
+    console.log('Password verification failed for:', data.email);
     return {
       statusCode: 401,
       headers: corsHeaders,
@@ -288,11 +257,17 @@ const handleLogin = async (data) => {
     };
   }
 
-  // Update login info
-  await updateUserLogin(user.userId);
+  console.log('Password verified successfully, updating login info...');
+
+  // Update login info (commented out since last_login and login_count columns don't exist)
+  // await updateUserLogin(user.id);
+
+  console.log('Generating JWT token...');
 
   // Generate JWT token
-  const token = generateToken(user.userId, user.email);
+  const token = generateToken(user.id, user.email);
+
+  console.log('Login successful for:', data.email);
 
   return {
     statusCode: 200,
@@ -302,7 +277,7 @@ const handleLogin = async (data) => {
       message: 'Login successful!',
       token,
       user: {
-        userId: user.userId,
+        userId: user.id,
         email: user.email,
         name: user.name,
         lastLogin: new Date().toISOString()
@@ -382,22 +357,35 @@ exports.handler = async (event) => {
     const path = event.path || event.rawPath;
     const method = event.httpMethod;
 
+    console.log('Processing request:', method, path);
+
     // Route handling
     if (method === 'POST' && path.includes('/register')) {
+      console.log('Handling registration request');
       const data = JSON.parse(event.body);
-      return await handleRegister(data);
+      console.log('Registration data:', data);
+      const result = await handleRegister(data);
+      console.log('Registration result:', result);
+      return result;
     }
     
     if (method === 'POST' && path.includes('/login')) {
+      console.log('Handling login request');
       const data = JSON.parse(event.body);
-      return await handleLogin(data);
+      const result = await handleLogin(data);
+      console.log('Login result:', result);
+      return result;
     }
     
     if (method === 'GET' && path.includes('/verify')) {
-      return await handleVerify(event);
+      console.log('Handling verify request');
+      const result = await handleVerify(event);
+      console.log('Verify result:', result);
+      return result;
     }
 
     // Invalid route
+    console.log('Invalid route:', method, path);
     return {
       statusCode: 404,
       headers: corsHeaders,

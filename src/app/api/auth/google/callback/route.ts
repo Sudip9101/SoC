@@ -25,24 +25,15 @@ export async function POST(request: NextRequest) {
         verified_email: true
       };
 
-      // Generate mock JWT token
       const token = 'jwt_' + Math.random().toString(36).substr(2, 20);
 
-      console.log('Google OAuth callback (development):', {
-        user: mockGoogleUser,
-        timestamp: new Date().toISOString()
-      });
-
-      // Save user to database
       try {
         const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
         
-        // Check if user already exists
         let existingUser = await getUserByEmail(mockGoogleUser.email);
         let userId;
 
         if (!existingUser) {
-          // Create new user
           const createResult = await createUser({
             email: mockGoogleUser.email,
             name: mockGoogleUser.name,
@@ -52,16 +43,11 @@ export async function POST(request: NextRequest) {
           
           if (createResult.success) {
             userId = createResult.userId;
-            console.log('✅ New user created in database:', mockGoogleUser.email);
-          } else {
-            console.log('⚠️ User creation failed:', createResult.error);
           }
         } else {
           userId = existingUser.id;
-          console.log('✅ Existing user found:', existingUser.email);
         }
 
-        // Log authentication action
         if (userId) {
           await logAuthAction({
             user_id: userId,
@@ -70,11 +56,10 @@ export async function POST(request: NextRequest) {
             user_agent: 'Google OAuth',
             success: true
           });
-          console.log('✅ Auth action logged for user:', userId);
         }
 
       } catch (dbError) {
-        console.error('❌ Database error during Google OAuth:', dbError);
+        console.error('Database error during Google OAuth:', dbError);
       }
 
       return NextResponse.json({
@@ -147,13 +132,7 @@ export async function POST(request: NextRequest) {
         }
 
         const googleUser = await userInfoResponse.json();
-        
-        console.log('Real Google OAuth callback:', {
-          user: googleUser,
-          timestamp: new Date().toISOString()
-        });
 
-        // Save real Google user to database
         try {
           const { createUser, getUserByEmail, logAuthAction } = require('../../../../lib/database');
           
@@ -170,13 +149,9 @@ export async function POST(request: NextRequest) {
             
             if (createResult.success) {
               userId = createResult.userId;
-              console.log('✅ New real Google user created in database:', googleUser.email);
-            } else {
-              console.log('⚠️ Real Google user creation failed:', createResult.error);
             }
           } else {
             userId = existingUser.id;
-            console.log('✅ Existing real Google user found:', existingUser.email);
           }
 
           if (userId) {
@@ -187,11 +162,10 @@ export async function POST(request: NextRequest) {
               user_agent: 'Google OAuth',
               success: true
             });
-            console.log('✅ Real Google OAuth action logged for user:', userId);
           }
 
         } catch (dbError) {
-          console.error('❌ Database error during real Google OAuth:', dbError);
+          console.error('Database error during real Google OAuth:', dbError);
         }
 
         const token = 'jwt_' + Math.random().toString(36).substr(2, 20);
