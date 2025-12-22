@@ -451,7 +451,7 @@ The next era of silicon won't just be "Made in India"—it will be "Architected 
     author: {
       name: 'Dr. Kunwar Singh',
       role: 'Cofounder & Director',
-      avatar: '/logo.svg'
+      avatar: '/team/kunwar-singh.png'
     },
     publishDate: '2025-12-19',
     lastUpdated: '2025-12-19',
