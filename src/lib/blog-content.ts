@@ -358,11 +358,6 @@ Let SoCTeamup help you design, deploy, and scale your next-gen security infrastr
     content: `
 # The Lab-to-Fab Gap: Need for essential pivot from Chip Designers to EDA Architects
 
-**Date:** December 19, 2025  
-**Prepared by:** Dr. Kunwar Singh, Cofounder & Director
-
----
-
 ## Introduction
 
 The global semiconductor race is often visualized through the lens of massive "Fabs"—monolithic manufacturing plants costing upwards of $10 billion to $20 billion [1, 2]. While India's recent progress in securing fabrication partnerships is a monumental step, a critical gap remains in the shadows: the Electronic Design Automation (EDA) software stack.
@@ -431,19 +426,31 @@ The next era of silicon won't just be "Made in India"—it will be "Architected 
 
 ## References
 
-1. Blackridge Research, "Semiconductor Fabrication Plants in India: 2025 Update," Jan 2025.
-2. PatentPC, "Chip Manufacturing Costs: 3nm Fab Investment Analysis," Dec 2025.
-3. PwC, "Semiconductor and Beyond: India's Talent Pool Growth Report," Sep 2025.
-4. Deccan Herald, "India Semiconductors: Sector to Hit $103 Billion by 2030," Sep 2025.
-5. The Times of India, "India Hosts 20% of World's Chip Design Engineers," Sep 2025.
-6. PIB Delhi, "India's Semiconductor Vision: 3nm Design and Talent Initiatives," Jul 2025.
-7. Market Growth Reports, "Electronic Design Automation (EDA) Software Market Forecast," Nov 2025.
-8. AWS for Industries, "Economics of EDA on AWS: License Cost Optimization," 2025.
-9. Synopsys Blog, "EDA in the Cloud: Scaling Verification to 10,000+ Cores," 2025.
-10. PIB India, "DHRUV64: India's First 1.0 GHz Indigenous dual-core Microprocessor," Dec 2025.
-11. Orbit & Skyline, "Legacy Tool Management: Extending Semiconductor Lifespans," Jan 2025.
-12. Chetan Patil, "The Key Factors in Semiconductor Node Selection," Feb 2025.
-13. OpenROAD Project & SkyWater Foundries, "Open-Source PDK and 24-Hour Design Flows," 2025.
+**1.** Blackridge Research, "Semiconductor Fabrication Plants in India: 2025 Update," Jan 2025.
+
+**2.** PatentPC, "Chip Manufacturing Costs: 3nm Fab Investment Analysis," Dec 2025.
+
+**3.** PwC, "Semiconductor and Beyond: India's Talent Pool Growth Report," Sep 2025.
+
+**4.** Deccan Herald, "India Semiconductors: Sector to Hit $103 Billion by 2030," Sep 2025.
+
+**5.** The Times of India, "India Hosts 20% of World's Chip Design Engineers," Sep 2025.
+
+**6.** PIB Delhi, "India's Semiconductor Vision: 3nm Design and Talent Initiatives," Jul 2025.
+
+**7.** Market Growth Reports, "Electronic Design Automation (EDA) Software Market Forecast," Nov 2025.
+
+**8.** AWS for Industries, "Economics of EDA on AWS: License Cost Optimization," 2025.
+
+**9.** Synopsys Blog, "EDA in the Cloud: Scaling Verification to 10,000+ Cores," 2025.
+
+**10.** PIB India, "DHRUV64: India's First 1.0 GHz Indigenous dual-core Microprocessor," Dec 2025.
+
+**11.** Orbit & Skyline, "Legacy Tool Management: Extending Semiconductor Lifespans," Jan 2025.
+
+**12.** Chetan Patil, "The Key Factors in Semiconductor Node Selection," Feb 2025.
+
+**13.** OpenROAD Project & SkyWater Foundries, "Open-Source PDK and 24-Hour Design Flows," 2025.
     `,
     author: {
       name: 'Dr. Kunwar Singh',
