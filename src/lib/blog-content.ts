@@ -369,7 +369,9 @@ At SoCTeamup Semiconductors, we believe that for a nation with a world-leading s
 True self-reliance in the semiconductor space rests on three pillars:
 
 1. **Fabrication:** The physical manufacturing capacity.
+
 2. **Design:** The architectural blueprint of the chip.
+
 3. **EDA Tools:** The specialized software used to create, simulate, and verify those blueprints.
 
 While India currently hosts nearly 20% of the world's semiconductor design engineers [3, 4], most utilize proprietary, foreign-licensed toolchains. With top-tier EDA licenses costing upwards of $50,000 to $500,000 annually per seat [5], this creates a significant barrier to entry for local startups and academic researchers. This is the "Lab-to-Fab Gap"—the distance between an innovative academic idea and a manufacturable piece of silicon.
