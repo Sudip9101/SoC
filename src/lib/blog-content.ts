@@ -460,7 +460,7 @@ The next era of silicon won't just be "Made in India"—it will be "Architected 
     featured: true,
     readTime: 7,
     slug: 'lab-to-fab-gap-eda-architects',
-    coverImage: '/blog4.png',
+    coverImage: '/bloog4.png',
     published: true
   }
 ];
